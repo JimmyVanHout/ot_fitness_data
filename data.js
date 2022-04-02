@@ -208,8 +208,8 @@ function validateInt(s) {
     }
 }
 
-function validateFloat(s) {
-    if (!s || s.length == 0 || s.match(/\d+\.\d+/)) {
+function validateIntOrFloat(s) {
+    if (!s || s.length == 0 || s.match(/\d+/) || s.match(/\d+\.\d+/)) {
         return true;
     } else {
         return false;
@@ -228,39 +228,39 @@ function validate(heading, rows) {
     if (!validateHeading(heading)) {
         return false;
     }
-    for (row of rows) {
-        for (let i = 0; i < 8; i++) {
-            if (row[i].length == 0) {
+    for (let i = 0; i < rows.length; i++) {
+        for (let j = 0; j < 8; j++) {
+            if (rows[i][j].length == 0) {
                 return false;
             }
         }
         let wordsIndex = [0, 3];
         for (index of wordsIndex) {
-            if (!validateWords(row[index])) {
+            if (!validateWords(rows[i][index])) {
                 return false;
             }
         }
-        if (!validateDate(row[1])) {
+        if (!validateDate(rows[i][1])) {
             return false;
         }
-        if (!validateTimeOfDay(row[2])) {
+        if (!validateTimeOfDay(rows[i][2])) {
             return false;
         }
         let intsIndex = [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 18, 19, 23, 26];
         for (index of intsIndex) {
-            if (!validateInt(row[index])) {
+            if (!validateInt(rows[i][index])) {
                 return false;
             }
         }
         let floatsIndex = [14, 16, 17, 22, 25, 27, 31];
         for (index of floatsIndex) {
-            if (!validateFloat(row[index])) {
+            if (!validateIntOrFloat(rows[i][index])) {
                 return false;
             }
         }
         let timesIndex = [15, 20, 21, 24, 29, 30];
         for (index of timesIndex) {
-            if (!validateTime(row[index])) {
+            if (!validateTime(rows[i][index])) {
                 return false;
             }
         }
