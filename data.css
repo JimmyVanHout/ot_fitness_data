@@ -1,0 +1,124 @@
+body {
+    width: 50%;
+    max-width: 820px;
+    min-width: 800px;
+    margin: auto;
+}
+h1 {
+    text-align: center;
+    color: #ED7010;
+}
+h2 {
+    color: #ED7010;
+}
+h3 {
+    color: #ED7010;
+}
+h4 {
+    color: #ED7010;
+}
+.code_block {
+    white-space: pre-line;
+}
+.nav_bar_link {
+    display: block;
+    text-align: center;
+    color: #FFFFFF;
+    padding: 8px;
+    text-decoration: none;
+}
+.nav_bar_link:hover {
+    background-color: #C0621A;
+}
+.all_data_table_cell {
+    border: 1px solid black;
+}
+.data_container {
+    display: grid;
+    grid-template-columns: auto auto;
+    column-gap: 10%;
+}
+.table_container {
+    width: 100%;
+    max-height: 300px;
+    overflow: auto;
+}
+.stats_container {
+    width: 100%;
+    font-size: 1.4rem;
+}
+.data_table {
+    width: 100%;
+    font-size: 1.2rem;
+}
+#title_container {
+    text-align: center;
+    padding: 20px;
+}
+#title {
+    font-size: 3rem;
+}
+#nav_bar {
+    display: grid;
+    grid-template-columns: min-content min-content min-content min-content;
+    white-space: nowrap;
+    justify-items: start;
+    background-color: #ED7010;
+}
+#error_message_container {
+    text-align: center;
+}
+#error_message {
+    font-size: 1.6rem;
+    color: #ED7010;
+}
+#no_data_message_container {
+    text-align: center;
+}
+#no_data_message {
+    font-size: 1.6rem;
+    color: #ED7010;
+}
+#graph_container {
+    margin: auto;
+}
+#zones_averages_table {
+    width: 60%;
+    font-size: 1.2rem;
+}
+#zones_totals_table {
+    width: 60%;
+    font-size: 1.2rem;
+}
+#footer {
+    text-align: center;
+}
+#graph_description {
+    text-align: center;
+}
+#all_data_description {
+    text-align: center;
+}
+#all_data_table_container {
+    width: 100%;
+    max-height: 400px;
+    overflow: auto;
+}
+#all_data_table {
+    border: 1px solid black;
+}
+#graph_selector_form {
+    display: grid;
+    grid-template-columns: auto auto;
+}
+#graph_selector_form_right {
+    border: 1px solid black;
+    max-height: 150px;
+    overflow: auto;
+}
+#value_by_time_mean_description {
+    color: #10ED70;
+}
+#value_by_time_std_dev_description {
+    color: #7010ED;
+}

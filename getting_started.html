@@ -1,0 +1,182 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>OT Fitness Data | Getting Started</title>
+        <link rel="stylesheet" href="getting_started.css">
+    </head>
+    <body>
+        <div id="title_container">
+            <span id="title"><span style="color: #ED7010;">OT Fitness</span> <span style="color: #108DED">Data</span></span>
+        </div>
+        <div id="nav_bar">
+            <div class="nav_bar_element">
+                <a href="index.html" class="nav_bar_link">Home</a>
+            </div>
+            <div class="nav_bar_element">
+                <a href="getting_started.html" class="nav_bar_link">Getting Started</a>
+            </div>
+            <div class="nav_bar_element">
+                <a href="data.html" class="nav_bar_link">Data</a>
+            </div>
+            <div class="nav_bar_element">
+                <a href="help.html" class="nav_bar_link">Help</a>
+            </div>
+        </div>
+        <br>
+        <h1>Getting Started</h1>
+        <h2>About</h2>
+        <p>
+            This site analyzes the data from your OrangeTheory Fitness workout summary emails and displays the results. It runs entirely in your browser, so your data stays on your computer--it is not sent to a server.
+        </p>
+        <p>
+            To extract the data from the emails, you will run a program that does this, as described in the steps below. You will only have to complete the sequence of steps in the <a href="#first-time">First Time</a> section once. After that, running the program is much simpler (see <a href="#next-time">Next Time</a>), depending on the settings you choose during the configuration.
+        </p>
+        <p>
+            Please watch this video overview to get started:
+        </p>
+        <div id="overview_video_container">
+            <p>Video coming soon.</p>
+        </div>
+        <h2 id="first-time">First Time</h2>
+        <p>
+            In short, the recommended approach described below is to create a new Gmail account to use only for your workout summary emails. <i>Past</i> emails can be forwarded from your usual account to this new account using the data-extracting program, and <i>future</i> emails can be forwarded using a filter. After the program runs, you will upload the newly created data file to this site, which will analyze and display the data for you.
+        </p>
+        <p>
+            Below are the detailed instructions. If you need help, please visit the <a href="help.html">Help</a> page of this site.
+        </p>
+        <p>
+            <b>Note</b>: When downloading the following files, ensure they are all saved to the <b>same directory</b>.
+        </p>
+        <h3>Download the Program and Requirements</h3>
+        <ol>
+            <li>
+                <p>
+                    Download the <a href="https://www.python.org/downloads/" target="_blank">latest version of Python</a>.
+                </p>
+            </li>
+            <li>
+                <p>
+                    The data-extracting program is <a href="https://github.com/JimmyVanHout/otf_data" target="_blank">available on GitHub</a>, but for your convenience you may <a href="https://github.com/JimmyVanHout/otf_data/archive/refs/tags/v1.1.8.zip" download>download the program from GitHub here</a>. This program extracts the workout data from the emails to a CSV file. For a more detailed overview of how the program works, read the <a href="https://github.com/JimmyVanHout/otf_data" target="_blank">README file</a> (the next several steps are from that document). Important to note:
+                </p>
+                <ol>
+                    <li>
+                        <p>
+                            To avoid potential loss of data, <b>keep the program files within the program directory</b> (this is because the program writes the files <code>config.txt</code> and <code>data.csv</code> and will overwrite any existing files with these names in the same directory).
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            The program <b>saves the password of the new Gmail account you will create as plain text on your computer</b>. This shouldn't be an issue as long as proper security measures are taken, although if you would like you can disable this feature by running the program with the correct option (see the <a href="https://github.com/JimmyVanHout/otf_data" target="_blank">README</a>; note that this prevents the configuration file from being saved and will therefore require configuration of the program each time it is run).
+                        </p>
+                    </li>
+                </ol>
+            </li>
+            <li>
+                Install the program requirements. The recommended approach is via the command line:
+                <br>
+                <code class="code_block">
+                    cd &ltprogram_directory_path&gt
+                    pip3 install flask
+                    pip3 install bs4
+                </code>
+                <br>
+                where <code>&ltprogram_directory_path&gt</code> is the path to the program directory.
+                <br>
+                <br>
+                There is also an alternative approach using an install script (for Mac or Ubuntu) or the Windows Subsystem for Linux (for Windows) outlined <a href="help.html#installing-the-program-requirements" target="_blank">here on the Help page</a>.
+            </li>
+        </ol>
+        <h3>Set up the Gmail Configuration</h3>
+        <ol>
+            <li>
+                <p>
+                    Create a <a href="https://support.google.com/mail/answer/56256?hl=en" target="_blank">new Gmail account</a>. This account will be used to receive the workout summary emails. While creating a new account is not absolutely necessary, for security considerations and ease of use this is strongly recommended.
+                </p>
+            </li>
+            <li>
+                <p>
+                    On the Gmail account that typically receives the workout summary emails, set up a <a href="https://support.google.com/mail/answer/6579?hl=en" target="_blank">filter</a> to forward all future mail from <code>otbeatreport@orangetheoryfitness.com</code> to the new Gmail account you just created. Since a Gmail filter cannot forward past mail, the data-extracting program has the ability to do this.
+                </p>
+            </li>
+            <li>
+                <p>
+                    In order for the data-extracting program to be able to read from the new Gmail account, you must <a href="https://support.google.com/accounts/answer/1064203?hl=en&co=GENIE.Platform%3DDesktop" target="_blank">disable two-factor authentication</a> and <a href="https://support.google.com/accounts/answer/6010255?hl=en" target="_blank">enable "less secure app" access</a> on the new account in the <a href="https://myaccount.google.com/intro/security" target="_blank">security settings</a> for that account.
+                </p>
+            </li>
+        </ol>
+        <h3>Run and Configure the Program</h3>
+        <ol>
+            <li>
+                <p>
+                    As when installing the program requirements, there are two approaches to running the program. The recommended approach is again via the command line:
+                    <br>
+                    <code class="code_block">
+                        cd &ltprogram_directory_path&gt
+                        python3 otf_data.py
+                    </code>
+                    <br>
+                    where <code>&ltprogram_directory_path&gt</code> is the path to the program directory.
+                    <br>
+                    <br>
+                    The alternative methods are to use the helper script (for Mac or Ubuntu) or the Windows Subsystem for Linux (for Windows), outlined <a href="help.html#running-the-program" target="_blank">here on the Help page</a>.
+                </p>
+                <p>
+                    Once you run the program for the first time, a configuration menu will appear:
+                <ol>
+                    <li>
+                        <p>
+                            If you want to <b>forward</b> your past workout summary emails from your default account to your new account, <b>select the option to do so</b> and fill out the information.
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            To make the program run <b>faster</b> in the future, select the option to <b>only search for new workout summary emails</b>.
+                        </p>
+                    </li>
+                </ol>
+                <p>
+                    After filling out the information, submit the form. The program will run and generate the data file. If any records contained errors, they will be displayed and not included in the file.
+                </p>
+            </li>
+            <li>
+                <p>
+                    Once the data file has been generated, upload it to the <a href="data.html">Data</a> page of this site. The data will be analyzed and presented to you.
+                </p>
+            </li>
+        </ol>
+        <h2 id="next-time">Next Time</h2>
+        <p>
+            If you choose to leave two-factor authentication off and keep "less secure app" access turned on for your new Gmail account, whenever you want to see your newest data on this site in the future all you will need to do is:
+        </p>
+        <ol>
+            <li>
+                <p>
+                    Run the program. The recommended approach is via the command line:
+                    <br>
+                    <code class="code_block">
+                        cd &ltprogram_directory_path&gt
+                        python3 otf_data.py
+                    </code>
+                    <br>
+                    where <code>&ltprogram_directory_path&gt</code> is the path to the program directory.
+                    <br>
+                    <br>
+                    Again, the alternative approaches are outlined <a href="help.html#running-the-program" target="_blank">here on the Help page</a>.
+                </p>
+            </li>
+            <li>
+                <p>
+                    Upload the data file to the <a href="data.html">Data</a> page.
+                </p>
+            </li>
+        </ol>
+        <p>
+            You may you choose to turn on two-factor authentication and turn off "less secure app" access after you run the data-extracting program, just note that you will need to change these settings whenever you want to run the program in the future.
+        </p>
+        <br>
+        <div id="footer">
+            <p id="copyright_text">&copy 2022 <a href="https://github.com/JimmyVanHout" target="_blank">Jimmy Van Hout</a></p>
+        </div>
+    </body>
+</html>
