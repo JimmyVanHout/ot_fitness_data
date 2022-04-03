@@ -411,9 +411,18 @@ function hideAll() {
 }
 
 function getCoachesAndCounts(rows) {
+    let coachesLocations = {};
+    let nonUniqueCoaches = [];
+    for (row of rows) {
+        if (coachesLocations.hasOwnProperty(row[3]) && coachesLocations[row[3]] != row[0]) {
+            nonUniqueCoaches.push(row[3]);
+        } else {
+            coachesLocations[row[3]] = row[0];
+        }
+    }
     let coachesAndCounts = {};
     for (row of rows) {
-        let coach = row[3];
+        let coach = (nonUniqueCoaches.includes(row[3])) ? row[3].concat(" (", row[0], ")") : row[3];
         if (coachesAndCounts.hasOwnProperty(coach)) {
             coachesAndCounts[coach] += 1;
         } else {
@@ -470,12 +479,20 @@ function showCoachesData(heading=null, rows=null) {
 }
 
 function drawCoachesBarChart(coachesAndCounts) {
+    let labels = coachesAndCounts.map((x) => {
+        let match = x[0].match(/(.+) (\((?:.*)?\))/);
+        if (match) {
+            return [match[1], match[2]];
+        } else {
+            return x[0];
+        }
+    });
     let canvas = document.getElementById("graph");
     Chart.getChart("graph")?.destroy();
     let chart = new Chart(canvas, {
         type: "bar",
         data: {
-            labels: coachesAndCounts.map(x => x[0]),
+            labels: labels,
             datasets: [{
                 label: "Classes",
                 data: coachesAndCounts.map(x => x[1]),
@@ -690,7 +707,6 @@ function showValueByTime(heading=null, rows=null, value) {
         document.getElementById("value_by_time_mean").innerText = mean;
         document.getElementById("value_by_time_std_dev").innerText = stdDev;
     } else {
-        console.log("no");
         document.getElementById("no_data_message_container").hidden = false;
         document.getElementById("graph_container").hidden = true;
     }
