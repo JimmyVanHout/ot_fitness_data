@@ -24,9 +24,9 @@
             </div>
         </div>
         <br>
-        <h1>Upload Your Data</h1>
+        <h1>Data</h1>
         <p>
-            After successfully running the data-extracting program as described in <a href="getting_started.html">Getting Started</a>, upload the resulting <code>data.csv</code> file here:
+            After successfully running the data-extracting program as described in <a href="getting_started.html">Getting Started</a>, <b>upload</b> the resulting <code>data.csv</code> file here:
         </p>
         <form id="file_upload_form" name="file_upload_form">
             <input id="file_input" type="file" name="data_file">
@@ -60,6 +60,16 @@
                 </div>
                 <div id="graph_selector_form_right">
                 </div>
+            </form>
+            <form id="period_selector_form">
+                <input type="radio" id="period_all_time_selector" name="period_selector" value="all_time" checked>
+                <label for="period_all_time_selector">All Time</label>
+                <input type="radio" id="period_past_year_selector" name="period_selector" value="past_year">
+                <label for="period_past_year_selector">Past Year</label>
+                <input type="radio" id="period_past_month_selector" name="period_selector" value="past_month">
+                <label for="period_past_month_selector">Past Month</label>
+                <input type="radio" id="period_past_week_selector" name="period_selector" value="past_week">
+                <label for="period_past_month_selector">Past Week</label>
             </form>
             <h2 id="graph_description">Mean Minutes Per Zone</h2>
             <div id="no_data_message_container" hidden>

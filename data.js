@@ -74,20 +74,8 @@ function showZonesAveragesData(heading=null, rows=null) {
         heading = JSON.parse(localStorage["heading"]);
         rows = JSON.parse(localStorage["rows"]);
     }
-    let zonesAverages = null;
-    if (!localStorage["zonesAverages"]) {
-        zonesAverages = getZonesAverages(rows);
-        localStorage["zonesAverages"] = JSON.stringify(zonesAverages);
-    } else {
-        zonesAverages = JSON.parse(localStorage["zonesAverages"]);
-    }
-    let zonesStdDevs = null;
-    if (!localStorage["zonesStdDevs"]) {
-        zonesStdDevs = getZonesStdDevs(rows, zonesAverages);
-        localStorage["zonesStdDevs"] = JSON.stringify(zonesStdDevs);
-    } else {
-        zonesStdDevs = JSON.parse(localStorage["zonesStdDevs"]);
-    }
+    let zonesAverages = getZonesAverages(rows);
+    let zonesStdDevs = getZonesStdDevs(rows, zonesAverages);
     drawZonesBarChart(zonesAverages);
     removeAllChildren("zones_averages_table_body");
     addZonesLabelsToTable("zones_averages_table_body");
@@ -268,11 +256,34 @@ function validate(heading, rows) {
     return true;
 }
 
+function compareDates(date1, date2) {
+    if (date1.getFullYear() < date2.getFullYear()) {
+        return -1;
+    } else if (date1.getFullYear() > date2.getFullYear()) {
+        return 1;
+    } else {
+        if (date1.getMonth() < date2.getMonth()) {
+            return -1;
+        } else if (date1.getMonth() > date2.getMonth()) {
+            return 1;
+        } else {
+            if (date1.getDate() < date2.getDate()) {
+                return -1;
+            } else if (date1.getDate() > date2.getDate()) {
+                return 1;
+            } else {
+                return 0;
+            }
+        }
+    }
+}
+
 async function getNewData() {
     clearPreviousData(false);
     let headingAndRows = await getHeadingAndRows(this);
     let heading = headingAndRows[0];
     let rows = headingAndRows[1];
+    localStorage["updateDate"] = JSON.stringify(new Date());
     if (validate(heading, rows)) {
         let units = getUnits();
         localStorage["heading"] = JSON.stringify(heading);
@@ -448,13 +459,7 @@ function showCoachesData(heading=null, rows=null) {
         heading = JSON.parse(localStorage["heading"]);
         rows = JSON.parse(localStorage["rows"]);
     }
-    let coachesAndCounts = null;
-    if (!localStorage["coachesAndCounts"]) {
-        coachesAndCounts = getCoachesAndCounts(rows);
-        localStorage["coachesAndCounts"] = JSON.stringify(coachesAndCounts);
-    } else {
-        coachesAndCounts = JSON.parse(localStorage["coachesAndCounts"]);
-    }
+    let coachesAndCounts = getCoachesAndCounts(rows);
     drawCoachesBarChart(coachesAndCounts);
     removeAllChildren("coaches_table_body");
     let coaches = coachesAndCounts.map(x => x[0]);
@@ -529,13 +534,7 @@ function showLocationsData(heading=null, rows=null) {
         heading = JSON.parse(localStorage["heading"]);
         rows = JSON.parse(localStorage["rows"]);
     }
-    let locationsAndCounts = null;
-    if (!localStorage["locationsAndCounts"]) {
-        locationsAndCounts = getLocationsAndCounts(rows);
-        localStorage["locationsAndCounts"] = JSON.stringify(locationsAndCounts);
-    } else {
-        locationsAndCounts = JSON.parse(localStorage["locationsAndCounts"]);
-    }
+    let locationsAndCounts = getLocationsAndCounts(rows);
     drawLocationsBarChart(locationsAndCounts);
     removeAllChildren("locations_table_body");
     let locations = locationsAndCounts.map(x => x[0]);
@@ -583,13 +582,7 @@ function showZonesTotalsData(heading=null, rows=null) {
         heading = JSON.parse(localStorage["heading"]);
         rows = JSON.parse(localStorage["rows"]);
     }
-    let zonesTotals = null;
-    if (!localStorage["zonesTotals"]) {
-        zonesTotals = getZonesTotals(rows);
-        localStorage["zonesTotals"] = JSON.stringify(zonesTotals);
-    } else {
-        zonesTotals = JSON.parse(localStorage["zonesTotals"]);
-    }
+    let zonesTotals = getZonesTotals(rows);
     drawZonesBarChart(zonesTotals);
     removeAllChildren("zones_totals_table_body");
     addZonesLabelsToTable("zones_totals_table_body");
@@ -605,13 +598,13 @@ function getSeconds(time) {
     return seconds;
 }
 
-function showValueByTime() {
+function showValueByTime(heading=null, rows=null, value) {
     hideAll();
-    let heading = JSON.parse(localStorage["heading"]);
-    let rows = JSON.parse(localStorage["rows"]);
+    heading = heading ?? JSON.parse(localStorage["heading"]);
+    rows = rows ?? JSON.parse(localStorage["rows"]);
     let prettyHeading = JSON.parse(localStorage["prettyHeading"]);
     let units = JSON.parse(localStorage["units"]);
-    let valueIndex = heading.indexOf(this.value);
+    let valueIndex = heading.indexOf(value);
     let timeIndex = heading.indexOf("date");
     let title = units[valueIndex] ? prettyHeading[valueIndex].concat(" (", units[valueIndex], ")") : prettyHeading[valueIndex];
     document.getElementById("graph_description").innerText = title;
@@ -697,6 +690,7 @@ function showValueByTime() {
         document.getElementById("value_by_time_mean").innerText = mean;
         document.getElementById("value_by_time_std_dev").innerText = stdDev;
     } else {
+        console.log("no");
         document.getElementById("no_data_message_container").hidden = false;
         document.getElementById("graph_container").hidden = true;
     }
@@ -814,7 +808,7 @@ function showRightSideSelectors(heading=null, rows=null) {
         radioInput.id = heading[i].concat("_selector");
         radioInput.name = "data_selector";
         radioInput.value = heading[i];
-        radioInput.onclick = showValueByTime;
+        radioInput.addEventListener("click", display);
         rightSideSelectorsCtnr.appendChild(radioInput);
         let label = document.createElement("label");
         label.for = radioInput.id;
@@ -824,19 +818,222 @@ function showRightSideSelectors(heading=null, rows=null) {
     }
 }
 
+function isLeapYear(year) {
+    if (year % 4 == 0 && (year % 100 != 0 || (year % 100 == 0 && year % 400 == 0))) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function getOneYearAgo(date) {
+    let day = date.getDate();
+    let month = date.getMonth();
+    let year = date.getFullYear();
+    if (day == 29 && month == 1 && isLeapYear(year)) {
+        day = 28;
+    }
+    year--;
+    let newDate = new Date();
+    newDate.setFullYear(year);
+    newDate.setMonth(month);
+    newDate.setDate(day);
+    return newDate;
+}
+
+function getOneMonthAgo(date) {
+    let day = date.getDate();
+    let month = date.getMonth();
+    let year = date.getFullYear();
+    let dayCounts = {
+        0: 31,
+        1: 28,
+        2: 31,
+        3: 30,
+        4: 31,
+        5: 30,
+        6: 31,
+        7: 31,
+        8: 30,
+        9: 31,
+        10: 30,
+        11: 31,
+    }
+    let previousMonth = month - 1;
+    let previousYear = year;
+    if (previousMonth == -1) {
+        previousMonth = 11;
+        previousYear--;
+    }
+    let previousDay = day;
+    if (day > dayCounts[previousMonth]) {
+        if (previousMonth == 1 && isLeapYear(year)) {
+            previousDay = 29;
+        } else {
+            previousDay = dayCounts[previousMonth];
+        }
+    }
+    let newDate = new Date();
+    newDate.setFullYear(previousYear);
+    newDate.setMonth(previousMonth);
+    newDate.setDate(previousDay);
+    return newDate;
+}
+
+function getOneWeekAgo(date) {
+    let day = date.getDate();
+    let month = date.getMonth();
+    let year = date.getFullYear();
+    let dayCounts = {
+        0: 31,
+        1: 28,
+        2: 31,
+        3: 30,
+        4: 31,
+        5: 30,
+        6: 31,
+        7: 31,
+        8: 30,
+        9: 31,
+        10: 30,
+        11: 31,
+    }
+    if (day < 7) {
+        month--;
+        if (month == -1) {
+            month = 11;
+            year--;
+        }
+        if (month == 1 && isLeapYear(year)) {
+            day = 29 - (-1) * (day - 7);
+        } else {
+            day = dayCounts[month] - (-1) * (day - 7);
+        }
+    } else {
+        day -= 7;
+    }
+    let newDate = new Date();
+    newDate.setFullYear(year);
+    newDate.setMonth(month);
+    newDate.setDate(day);
+    return newDate;
+}
+
+function display() {
+    let periodSelector = null;
+    let periodSelectorForm = document.getElementById("period_selector_form");
+    for (child of periodSelectorForm) {
+        if (child.type == "radio" && child.checked) {
+            periodSelector = child;
+            break;
+        }
+    }
+    let updateDate = new Date(JSON.parse(localStorage["updateDate"]));
+    let currentDate = new Date();
+    let rows = JSON.parse(localStorage["rows"]);
+    if (periodSelector.value == "past_year") {
+        if (compareDates(updateDate, currentDate) != 0 || !localStorage["rows_past_year"]) {
+            let date = getOneYearAgo(currentDate);
+            rows = rows.filter((row) => {
+                let rowDateMatch = row[1].match(/(\d{1,2})\/(\d{1,2})\/(\d{4})/);
+                let year = parseInt(rowDateMatch[3]);
+                let month = parseInt(rowDateMatch[1]) - 1;
+                let day = parseInt(rowDateMatch[2]);
+                let rowDate = new Date();
+                rowDate.setFullYear(year);
+                rowDate.setMonth(month);
+                rowDate.setDate(day);
+                let dateComparison = compareDates(rowDate, date);
+                return dateComparison == 0 || dateComparison == 1;
+            });
+            localStorage["rows_past_year"] = JSON.stringify(rows);
+        } else {
+            rows = JSON.parse(localStorage["rows_past_year"]);
+        }
+    } else if (periodSelector.value == "past_month") {
+        if (compareDates(updateDate, currentDate) != 0 || !localStorage["rows_past_month"]) {
+            let date = getOneMonthAgo(currentDate);
+            rows = rows.filter((row) => {
+                let rowDateMatch = row[1].match(/(\d{1,2})\/(\d{1,2})\/(\d{4})/);
+                let year = parseInt(rowDateMatch[3]);
+                let month = parseInt(rowDateMatch[1]) - 1;
+                let day = parseInt(rowDateMatch[2]);
+                let rowDate = new Date();
+                rowDate.setFullYear(year);
+                rowDate.setMonth(month);
+                rowDate.setDate(day);
+                let dateComparison = compareDates(rowDate, date);
+                return dateComparison == 0 || dateComparison == 1;
+            });
+            localStorage["rows_past_month"] = JSON.stringify(rows);
+        } else {
+            rows = JSON.parse(localStorage["rows_past_month"]);
+        }
+    } else if (periodSelector.value == "past_week") {
+        if (compareDates(updateDate, currentDate) != 0 || !localStorage["rows_past_week"]) {
+            let date = getOneWeekAgo(currentDate);
+            rows = rows.filter((row) => {
+                let rowDateMatch = row[1].match(/(\d{1,2})\/(\d{1,2})\/(\d{4})/);
+                let year = parseInt(rowDateMatch[3]);
+                let month = parseInt(rowDateMatch[1]) - 1;
+                let day = parseInt(rowDateMatch[2]);
+                let rowDate = new Date();
+                rowDate.setFullYear(year);
+                rowDate.setMonth(month);
+                rowDate.setDate(day);
+                let dateComparison = compareDates(rowDate, date);
+                return dateComparison == 0 || dateComparison == 1;
+            });
+            localStorage["rows_past_week"] = JSON.stringify(rows);
+        } else {
+            rows = JSON.parse(localStorage["rows_past_week"]);
+        }
+    }
+    let dataSelector = null;
+    let graphSelectorForm = document.getElementById("graph_selector_form");
+    for (child of graphSelectorForm) {
+        if (child.type == "radio" && child.checked) {
+            dataSelector = child;
+            break;
+        }
+    }
+    let heading = JSON.parse(localStorage["heading"]);
+    if (dataSelector.value == "zones_averages") {
+        showZonesAveragesData(heading, rows);
+    } else if (dataSelector.value == "zones_totals") {
+        showZonesTotalsData(heading, rows);
+    } else if (dataSelector.value == "coaches") {
+        showCoachesData(heading, rows);
+    } else if (dataSelector.value == "locations") {
+        showLocationsData(heading, rows);
+    } else {
+        showValueByTime(heading, rows, dataSelector.value);
+    }
+}
+
 function main() {
     let fileInput = document.getElementById("file_input");
     fileInput.addEventListener("change", getNewData);
     let clearButton = document.getElementById("clear_previous_data_button");
     clearButton.onclick = clearPreviousData;
-    let zonesAveragesSelector = document.getElementById("zones_averages_selector");
-    zonesAveragesSelector.onclick = showZonesAveragesData;
-    let zonesTotalsSelector = document.getElementById("zones_totals_selector");
-    zonesTotalsSelector.onclick = showZonesTotalsData;
-    let coachesSelector = document.getElementById("coaches_selector");
-    coachesSelector.onclick = showCoachesData;
-    let locationsSelector = document.getElementById("locations_selector");
-    locationsSelector.onclick = showLocationsData;
+    for (child of document.getElementById("graph_selector_form")) {
+        if (child.type == "radio") {
+            child.addEventListener("click", display);
+        }
+    }
+    for (child of document.getElementById("period_selector_form")) {
+        if (child.type == "radio") {
+            child.addEventListener("click", display);
+        }
+    }
+    let date = new Date();
+    if (!localStorage["updateDate"]) {
+        localStorage["updateDate"] = JSON.stringify(date);
+    } else {
+        if (new Date(JSON.stringify(localStorage["updateDate"])).getTime() != date.getTime()) {
+            localStorage["updateDate"] = JSON.stringify(date);
+        }
+    }
     if (!localStorage["units"]) {
         localStorage["units"] = JSON.stringify(getUnits());
     }
