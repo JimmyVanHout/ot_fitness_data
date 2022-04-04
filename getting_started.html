@@ -54,6 +54,9 @@
                 </p>
             </li>
         </ol>
+        <p>
+            Follow the steps below to get started:
+        </p>
         <h3>Set up the Gmail Configuration</h3>
         <ol>
             <li>
@@ -133,29 +136,107 @@
                     <br>
                     where <code>&ltprogram_directory_path&gt</code> is the path to the program directory. For example, if you saved cloned the program into your home directory, this might be <code>~/otf_data</code>.
                 </p>
+            </li>
+            <li>
+                Once you run the program for the first time, a configuration menu will appear. The <b>first checkbox</b> asks whether you want to <b>forward past emails</b> to your new account:
+                <h4>Choosing to Forward</h4>
                 <p>
-                    Once you run the program for the first time, a configuration menu will appear:
-                <ol>
-                    <li>
-                        <p>
-                            If you want to <b>forward</b> your past workout summary emails from your default account to your new account, select the option to do so and fill out the information.
-                        </p>
-                        <p>
-                            If you select this option, in the section titled "One-Time Forwarding of All Past OT Beat Report Emails from This Account", enter the email address and password of your usual Gmail account (the forwarding account). Then enter the address of your new Gmail account (the receiving account).
-                        </p>
-                    </li>
-                    <li>
-                        <p>
-                            In the last section, titled "Then Receive Them Here and Get OT Beat Report Data from This Account" if you selected the forwarding option or "Get OT Beat Report Data from This Account" if you did not, enter the email address and password of your new Gmail account. Then, in the field labeled "Comma-separated originating email addresses", enter <code>otbeatreport@orangetheoryfitness.com, </code> followed by the address of your usual Gmail account.
-                    <li>
-                        <p>
-                            To make the program run <b>faster</b> in the future, select the option to <b>only search for new workout summary emails</b>.
-                        </p>
-                    </li>
-                </ol>
-                <p>
-                    After filling out the information, <b>submit</b> the form. The program will run and generate the data file, named <code>data.csv</code>, in the program directory, <code>otf_data</code>. If any records contained errors, they will be displayed and not included in the file.
+                    <b>If you choose to forward past emails</b>, fill out the first section, titled "<b>One-Time Forwarding of All Past OT Beat Report Emails from This Account</b>", in the following way:
                 </p>
+                <ul>
+                    <li>
+                        <p>
+                            Enter the <b>email address</b> of your <b>usual Gmail account</b> (the <b>forwarding</b> account).
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            Enter the <b>password</b> of your <b>usual Gmail account</b> (the <b>forwarding</b> account).
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            Confirm the <b>password</b> of your <b>usual Gmail account</b> (the <b>forwarding</b> account).
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            Enter the <b>email address</b> of your <b>new Gmail account</b> (the <b>receiving</b> account).
+                        </p>
+                    </li>
+                </ul>
+                <p>
+                    Now fill out the next section, titled "<b>Then Receive Them Here and Get OT Beat Report Data from This Account</b>", in the following way:
+                </p>
+                <ul>
+                    <li>
+                        <p>
+                            Enter the <b>email address</b> of your <b>new Gmail account</b>.
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            Enter the <b>password</b> of your <b>new Gmail account</b>.
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            Confirm the <b>password</b> of your <b>new Gmail account</b>.
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            Under "<b>Comma-separated originating email addresses</b>", enter <code>otbeatreport@orangetheoryfitness.com, </code> (including the comma) followed by the address of your <b><i>usual</i> Gmail account</b>.
+                        </p>
+                    </li>
+                </ul>
+                <h4>Not Choosing to Forward</h4>
+                <p>
+                    <b>If you choose not to forward</b>, fill out the section titled "<b>Get OT Beat Report Data from This Account</b>", in the following way:
+                </p>
+                <ul>
+                    <li>
+                        <p>
+                            Enter the <b>email address</b> of your <b>new Gmail account</b>.
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            Enter the <b>password</b> of your <b>new Gmail account</b>.
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            Confirm the <b>password</b> of your <b>new Gmail account</b>.
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            Under "<b>Comma-separated originating email addresses</b>", enter <code>otbeatreport@orangetheoryfitness.com, </code> followed by the address of your <b><i>usual</i> Gmail account</b>.
+                        </p>
+                    </li>
+                </ul>
+                <p>
+                    Regardless of whether you choose to forward past emails or not, select the option to <b>only search for new workout summary emails</b> to make the program run <b>faster</b> in the future.
+                </p>
+                <p>
+                    After filling out the information, <b>submit</b> the form. The program will run and generate the data file, named <code>data.csv</code>, in the program directory, <code>otf_data</code>.
+                </p>
+                <p>
+                    Note:
+                </p>
+                <ul>
+                    <li>
+                        <p>
+                            If any records contained errors, they will be displayed and not included in the file.
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            If you <b>accidentally submitted incorrect information</b>, simply <b>delete the</b> <code>config.txt</code> <b>file</b> in the program directory (<code>otf_data</code>) and then run the program again.
+                        </p>
+                    </li>
+                </ul>
             </li>
             <li>
                 <p>
@@ -165,24 +246,24 @@
         </ol>
         <h2 id="next-time">Next Time</h2>
         <p>
-            If you choose to leave two-factor authentication off and keep "less secure app" access turned on for your new Gmail account, whenever you want to see your newest data on this site in the future all you will need to do is:
+            If you choose to leave two-factor authentication off and keep "less secure app" access turned on for your new Gmail account, in the future whenever you want to see your newest data on this site all you will need to do is:
         </p>
         <ol>
             <li>
                 <p>
-                    Run the program on the command line:
+                    <b>Run</b> the program on the command line (you will <b>not</b> have to complete the configuration again):
                     <br>
                     <code class="code_block">
                         cd &ltprogram_directory_path&gt
                         python3 otf_data.py
                     </code>
                     <br>
-                    where <code>&ltprogram_directory_path&gt</code> is the path to the program directory. For example, if you saved cloned the program into your home directory, this might be <code>~/otf_data</code>.
+                    where <code>&ltprogram_directory_path&gt</code> is the path to the program directory. For example, if you installed the program in your home directory, this might be <code>~/otf_data</code>.
                 </p>
             </li>
             <li>
                 <p>
-                    Upload the data file to the <a href="data.html">Data</a> page.
+                    <b>Upload</b> the data file to the <a href="data.html">Data</a> page.
                 </p>
             </li>
         </ol>
