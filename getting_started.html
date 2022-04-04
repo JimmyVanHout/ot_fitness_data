@@ -19,9 +19,6 @@
             <div class="nav_bar_element">
                 <a href="data.html" class="nav_bar_link">Data</a>
             </div>
-            <div class="nav_bar_element">
-                <a href="help.html" class="nav_bar_link">Help</a>
-            </div>
         </div>
         <br>
         <h1>Getting Started</h1>
@@ -43,57 +40,18 @@
             In short, the recommended approach described below is to create a new Gmail account to use only for your workout summary emails. <i>Past</i> emails can be forwarded from your usual account to this new account using the data-extracting program, and <i>future</i> emails can be forwarded using a filter. After the program runs, you will upload the newly created data file to this site, which will analyze and display the data for you.
         </p>
         <p>
-            Below are the detailed instructions. If you need help, please visit the <a href="help.html">Help</a> page of this site.
+            The program extracts the workout data from the emails to a CSV file. For a more detailed overview of how the program works, read the <a href="https://github.com/JimmyVanHout/otf_data" target="_blank">README file</a> (the next several steps are from that document). Important to note:
         </p>
-        <p>
-            <b>Note</b>: When downloading the following files, ensure they are all saved to the <b>same directory</b>.
-        </p>
-        <h3>Install the Program and Requirements</h3>
         <ol>
             <li>
                 <p>
-                    Download the <a href="https://www.python.org/downloads/" target="_blank">latest version of Python</a>.
+                    To avoid potential loss of data, <b>keep the program files within the program directory</b> (this is because the program writes the files <code>config.txt</code> and <code>data.csv</code> and will overwrite any existing files with these names in the same directory).
                 </p>
             </li>
             <li>
                 <p>
-                    The data-extracting program is <a href="https://github.com/JimmyVanHout/otf_data" target="_blank">available on GitHub</a>, and, using the command line and <b>ensuring there are no files in the current directory named</b> <code>otf_data</code>, this is the <b>recommended</b> way to install it:
-                    <br>
-                    <code class="code_block">
-                        git clone https://github.com/JimmyVanHout/otf_data.git
-                    </code>
-                    <br>
-                    See the section of the Help page on <a href="help.html#installing-the-program">installing the program</a> for help. For your convenience you may also <a href="https://github.com/JimmyVanHout/otf_data/archive/refs/heads/master.zip" download>download the program from GitHub here</a>.
+                    The program <b>saves the password of the new Gmail account you will create as plain text on your computer</b>. This shouldn't be an issue as long as proper security measures are taken, although if you would like you can disable this feature by running the program with the correct option (see the <a href="https://github.com/JimmyVanHout/otf_data" target="_blank">README</a>; note that this prevents the configuration file from being saved and will therefore require configuration of the program each time it is run).
                 </p>
-                <p>
-                    This program extracts the workout data from the emails to a CSV file. For a more detailed overview of how the program works, read the <a href="https://github.com/JimmyVanHout/otf_data" target="_blank">README file</a> (the next several steps are from that document). Important to note:
-                </p>
-                <ol>
-                    <li>
-                        <p>
-                            To avoid potential loss of data, <b>keep the program files within the program directory</b> (this is because the program writes the files <code>config.txt</code> and <code>data.csv</code> and will overwrite any existing files with these names in the same directory).
-                        </p>
-                    </li>
-                    <li>
-                        <p>
-                            The program <b>saves the password of the new Gmail account you will create as plain text on your computer</b>. This shouldn't be an issue as long as proper security measures are taken, although if you would like you can disable this feature by running the program with the correct option (see the <a href="https://github.com/JimmyVanHout/otf_data" target="_blank">README</a>; note that this prevents the configuration file from being saved and will therefore require configuration of the program each time it is run).
-                        </p>
-                    </li>
-                </ol>
-            </li>
-            <li>
-                Install the program requirements. The <b>recommended</b> approach is via the command line:
-                <br>
-                <code class="code_block">
-                    cd &ltprogram_directory_path&gt
-                    pip3 install flask
-                    pip3 install bs4
-                </code>
-                <br>
-                where <code>&ltprogram_directory_path&gt</code> is the path to the program directory.
-                <br>
-                <br>
-                See the section of the Help page on <a href="help.html#installing-the-program-requirements">installing the program requirements</a> for help and alternative ways to install the requirements.
             </li>
         </ol>
         <h3>Set up the Gmail Configuration</h3>
@@ -114,30 +72,81 @@
                 </p>
             </li>
         </ol>
-        <h3>Run and Configure the Program</h3>
+        <h3>Install the Program and Dependencies</h3>
+        <p>
+            If you need any help with the instructions below, see:
+        </p>
+        <ul>
+            <li>
+                <a href="https://support.apple.com/guide/terminal/execute-commands-and-run-tools-apdb66b5242-0d18-49fc-9c47-a2498b7c91d5/mac" target="_blank">Mac command line</a>
+            </li>
+            <li>
+                <a href="https://ubuntu.com/tutorials/command-line-for-beginners#1-overview" target="_blank">Ubuntu command line</a>
+            </li>
+            <li>
+                <a href="https://docs.microsoft.com/en-us/powershell/scripting/overview?view=powershell-7.2" target="_blank">Windows PowerShell command line</a>
+            </li>
+        </ul>
         <ol>
             <li>
                 <p>
-                    As when installing the program requirements, the <b>recommended</b> approach to run the program is again via the command line:
+                    Download the <a href="https://www.python.org/downloads/" target="_blank">latest version of Python</a>.
+                </p>
+            </li>
+            <li>
+                <p>
+                    Run the following on the command line:
+                    <br>
+                    <code class="code_block">
+                        git clone https://github.com/JimmyVanHout/otf_data.git
+                        pip3 install flask
+                        pip3 install bs4
+                    </code>
+                    <br>
+                </p>
+            </li>
+        </ol>
+        <h3>Run and Configure the Program</h3>
+        <p>
+            If you need any help with the instructions below, see:
+        </p>
+        <ul>
+            <li>
+                <a href="https://support.apple.com/guide/terminal/execute-commands-and-run-tools-apdb66b5242-0d18-49fc-9c47-a2498b7c91d5/mac" target="_blank">Mac command line</a>
+            </li>
+            <li>
+                <a href="https://ubuntu.com/tutorials/command-line-for-beginners#1-overview" target="_blank">Ubuntu command line</a>
+            </li>
+            <li>
+                <a href="https://docs.microsoft.com/en-us/powershell/scripting/overview?view=powershell-7.2" target="_blank">Windows PowerShell command line</a>
+            </li>
+        </ul>
+        <ol>
+            <li>
+                <p>
+                    Run the following on the command line:
                     <br>
                     <code class="code_block">
                         cd &ltprogram_directory_path&gt
                         python3 otf_data.py
                     </code>
                     <br>
-                    where <code>&ltprogram_directory_path&gt</code> is the path to the program directory.
-                    <br>
-                    <br>
-                    See the section of the Help page on <a href="help.html#running-the-program">running the program</a> for help and alternative ways to run the program.
+                    where <code>&ltprogram_directory_path&gt</code> is the path to the program directory. For example, if you saved cloned the program into your home directory, this might be <code>~/otf_data</code>.
                 </p>
                 <p>
                     Once you run the program for the first time, a configuration menu will appear:
                 <ol>
                     <li>
                         <p>
-                            If you want to <b>forward</b> your past workout summary emails from your default account to your new account, <b>select the option to do so</b> and fill out the information.
+                            If you want to <b>forward</b> your past workout summary emails from your default account to your new account, select the option to do so and fill out the information.
+                        </p>
+                        <p>
+                            If you select this option, in the section titled "One-Time Forwarding of All Past OT Beat Report Emails from This Account", enter the email address and password of your usual Gmail account (the forwarding account). Then enter the address of your new Gmail account (the receiving account).
                         </p>
                     </li>
+                    <li>
+                        <p>
+                            In the last section, titled "Then Receive Them Here and Get OT Beat Report Data from This Account" if you selected the forwarding option or "Get OT Beat Report Data from This Account" if you did not, enter the email address and password of your new Gmail account. Then, in the field labeled "Comma-separated originating email addresses", enter <code>otbeatreport@orangetheoryfitness.com, </code> followed by the address of your usual Gmail account.
                     <li>
                         <p>
                             To make the program run <b>faster</b> in the future, select the option to <b>only search for new workout summary emails</b>.
@@ -145,12 +154,12 @@
                     </li>
                 </ol>
                 <p>
-                    After filling out the information, submit the form. The program will run and generate the data file. If any records contained errors, they will be displayed and not included in the file.
+                    After filling out the information, <b>submit</b> the form. The program will run and generate the data file, named <code>data.csv</code>, in the program directory, <code>otf_data</code>. If any records contained errors, they will be displayed and not included in the file.
                 </p>
             </li>
             <li>
                 <p>
-                    Once the data file has been generated, upload it to the <a href="data.html">Data</a> page of this site. The data will be analyzed and presented to you.
+                    Once the data file has been generated, <b>upload</b> it to the <a href="data.html">Data</a> page of this site. The data will be analyzed and presented to you.
                 </p>
             </li>
         </ol>
@@ -161,17 +170,14 @@
         <ol>
             <li>
                 <p>
-                    Run the program. The <b>recommended</b> approach is via the command line:
+                    Run the program on the command line:
                     <br>
                     <code class="code_block">
                         cd &ltprogram_directory_path&gt
                         python3 otf_data.py
                     </code>
                     <br>
-                    where <code>&ltprogram_directory_path&gt</code> is the path to the program directory.
-                    <br>
-                    <br>
-                    See the section of the Help page on <a href="help.html#running-the-program">running the program</a> for help and alternative ways to run the program.
+                    where <code>&ltprogram_directory_path&gt</code> is the path to the program directory. For example, if you saved cloned the program into your home directory, this might be <code>~/otf_data</code>.
                 </p>
             </li>
             <li>
