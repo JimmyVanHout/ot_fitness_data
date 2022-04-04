@@ -30,6 +30,9 @@ h4 {
 .nav_bar_link:hover {
     background-color: #C0621A;
 }
+.list_with_space {
+    line-height: 1.5;
+}
 #title_container {
     text-align: center;
     padding: 20px;

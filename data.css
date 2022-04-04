@@ -30,6 +30,9 @@ h4 {
 .nav_bar_link:hover {
     background-color: #C0621A;
 }
+.list_with_space {
+    line-height: 1.5;
+}
 .all_data_table_cell {
     border: 1px solid black;
 }

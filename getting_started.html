@@ -19,25 +19,22 @@
             <div class="nav_bar_element">
                 <a href="data.html" class="nav_bar_link">Data</a>
             </div>
+            <div class="nav_bar_element">
+                <a href="help.html" class="nav_bar_link">Help</a>
+            </div>
         </div>
         <br>
         <h1>Getting Started</h1>
         <h2>About</h2>
         <p>
-            This site analyzes the data from your OrangeTheory Fitness workout summary emails and displays the results. It runs entirely in your browser, so your data stays on your computer--it is not sent to a server.
+            This site analyzes the data from your OrangeTheory Fitness workout summary emails (emails from <code>otbeatreport@orangetheoryfitness.com</code>) and displays the results. It runs entirely in your browser, so <b>your data stays on your computer</b>--it is not sent to a server. <b>Note that this site is not affiliated with OrangeTheory Fitness.</b>
         </p>
         <p>
-            To extract the data from the emails, you will run a program that does this, as described in the steps below. You will only have to complete the sequence of steps in the <a href="#first-time">First Time</a> section once. After that, running the program is much simpler (see <a href="#next-time">Next Time</a>), depending on the settings you choose during the configuration.
+            Whenever you want to see your newest data on this site, you will first <b>run</b> a program to extract the data from the workout summary emails. Then you will <b>upload</b> the data to this site. You will only have to complete the sequence of steps in the <a href="#first-time">First Time</a> section once. After that, running the program is much simpler and faster (see <a href="#next-time">Next Time</a>), and if you use Mac or Linux it is as simple as double-clicking a script you can save to your desktop.
         </p>
-        <p>
-            Please watch this video overview to get started:
-        </p>
-        <div id="overview_video_container">
-            <p>Video coming soon.</p>
-        </div>
         <h2 id="first-time">First Time</h2>
         <p>
-            In short, the recommended approach described below is to create a new Gmail account to use only for your workout summary emails. <i>Past</i> emails can be forwarded from your usual account to this new account using the data-extracting program, and <i>future</i> emails can be forwarded using a filter. After the program runs, you will upload the newly created data file to this site, which will analyze and display the data for you.
+            The first time you want to run the data-extracting program and upload your data, you will <b>create a new Gmail account</b> to use only for your workout summary emails. <b><i>Past</i> emails can be forwarded</b> from your usual account to this new account using the <b>data-extracting program</b> (currently only works to forward from <b>Gmail</b> accounts), and <b><i>future</i> emails can be forwarded</b> using a <b>Gmail filter</b>. After you <b>run the program</b>, you will <b>upload</b> the newly created data file to this site, which will analyze and display the data for you.
         </p>
         <p>
             The program extracts the workout data from the emails to a CSV file. For a more detailed overview of how the program works, read the <a href="https://github.com/JimmyVanHout/otf_data" target="_blank">README file</a> (the next several steps are from that document). Important to note:
@@ -61,12 +58,12 @@
         <ol>
             <li>
                 <p>
-                    Create a <a href="https://support.google.com/mail/answer/56256?hl=en" target="_blank">new Gmail account</a>. This account will be used to receive the workout summary emails. While creating a new account is not absolutely necessary, for security considerations and ease of use this is strongly recommended.
+                    Create a <a href="https://support.google.com/mail/answer/56256?hl=en" target="_blank">new Gmail account</a>. This account will be used to receive the workout summary emails forwarded from your usual account. While creating a new account is not absolutely necessary, for security considerations and ease of use this is strongly recommended.
                 </p>
             </li>
             <li>
                 <p>
-                    On the Gmail account that typically receives the workout summary emails, set up a <a href="https://support.google.com/mail/answer/6579?hl=en" target="_blank">filter</a> to forward all future mail from <code>otbeatreport@orangetheoryfitness.com</code> to the new Gmail account you just created. Since a Gmail filter cannot forward past mail, the data-extracting program has the ability to do this.
+                    On the Gmail account that typically receives the workout summary emails, set up a <a href="https://support.google.com/mail/answer/6579?hl=en" target="_blank">filter</a> to forward all future mail from <code>otbeatreport@orangetheoryfitness.com</code> to the new Gmail account you just created. Since a Gmail filter cannot forward <i>past</i> mail, the data-extracting program has the ability to do this.
                 </p>
             </li>
             <li>
@@ -74,192 +71,194 @@
                     In order for the data-extracting program to be able to read from the new Gmail account, you must <a href="https://support.google.com/accounts/answer/1064203?hl=en&co=GENIE.Platform%3DDesktop" target="_blank">disable two-factor authentication</a> and <a href="https://support.google.com/accounts/answer/6010255?hl=en" target="_blank">enable "less secure app" access</a> on the new account in the <a href="https://myaccount.google.com/intro/security" target="_blank">security settings</a> for that account.
                 </p>
             </li>
+            <li>
+                <p>
+                    (Optional) If you choose to forward <i>past</i> workout summary emails to your new account (in a later step), then you must <b>temporarily</b> <a href="https://support.google.com/accounts/answer/1064203?hl=en&co=GENIE.Platform%3DDesktop" target="_blank">disable two-factor authentication</a> and <a href="https://support.google.com/accounts/answer/6010255?hl=en" target="_blank">enable "less secure app" access</a> in the <a href="https://myaccount.google.com/intro/security" target="_blank">security settings</a> of the account you wish to forward them from (that is, the account that typically receives the emails). Remember that the forwarding feature can currently only forward from Gmail accounts.
+                </p>
+                <p>
+                    <b>Only do this if you are comfortable with the security risk this presents</b>, and once you have finished running the program for the first time following the steps below, <b>immediately revert the security settings back to normal</b> by <a href="https://support.google.com/accounts/answer/6010255?hl=en" target="_blank">disabling "less secure app" access</a> and <a href="https://www.google.com/landing/2step/" target="_blank">re-enabling two-factor authentication</a> for this account.
+                </p>
+                <p>
+                    You will only need to toggle these settings once for this account since the forwarding feature is only performed once by the program to forward all <i>past</i> emails. The Gmail filter you set up earlier will take care of forwarding all <i>future</i> emails.
+                </p>
+            </li>
         </ol>
         <h3>Install the Program and Dependencies</h3>
-        <p>
-            If you need any help with the instructions below, see:
-        </p>
-        <ul>
-            <li>
-                <a href="https://support.apple.com/guide/terminal/execute-commands-and-run-tools-apdb66b5242-0d18-49fc-9c47-a2498b7c91d5/mac" target="_blank">Mac command line</a>
-            </li>
-            <li>
-                <a href="https://ubuntu.com/tutorials/command-line-for-beginners#1-overview" target="_blank">Ubuntu command line</a>
-            </li>
-            <li>
-                <a href="https://docs.microsoft.com/en-us/powershell/scripting/overview?view=powershell-7.2" target="_blank">Windows PowerShell command line</a>
-            </li>
-        </ul>
         <ol>
             <li>
                 <p>
-                    Download the <a href="https://www.python.org/downloads/" target="_blank">latest version of Python</a>.
+                    If you don't have it already, download the <a href="https://www.python.org/downloads/" target="_blank">latest version of Python</a>.
                 </p>
             </li>
             <li>
                 <p>
-                    Run the following on the command line:
+                    Open a terminal and run the following on the <a href="help.html#using-the-command-line">command line</a>:
                     <br>
                     <code class="code_block">
+                        cd &ltinstall_directory&gt
                         git clone https://github.com/JimmyVanHout/otf_data.git
                         pip3 install flask
                         pip3 install bs4
                     </code>
                     <br>
+                    where <code>&ltinstall_directory&gt</code> is the directory where you want to install the program. For example, if you plan to install the program in your <b>home directory</b>, the line would be:
+                    <br>
+                    <code class="code_block">
+                        cd ~
+                    </code>
+                    <br>
+                    Note that in order to use the provided <a href="help.html#using-the-run-script">run script</a> for future runs (Mac or Linux only), <code>&ltinstall_directory&gt</code> <b>must</b> be your home directory.
                 </p>
             </li>
         </ol>
         <h3>Run and Configure the Program</h3>
+        <ol>
+            <li>
+                <p>
+                    Open a terminal and run the following on the <a href="help.html#using-the-command-line">command line</a>:
+                    <br>
+                    <code class="code_block">
+                        cd &ltprogram_directory_path&gt
+                        python3 otf_data.py
+                    </code>
+                    <br>
+                    where <code>&ltprogram_directory_path&gt</code> is the path to the program directory. For example, if you installed the program in your <b>home directory</b>, the line would be:
+                    <br>
+                    <code class="code_block">
+                        cd ~/otf_data
+                    </code>
+                </p>
+            </li>
+            <li>
+                When running the program for the first time, a configuration menu will appear.
+                <ul>
+                    <li>
+                        <p>
+                            The <b>first checkbox</b> asks whether you want to <b>forward past emails</b> to your new account. If you choose not to forward past emails, you can skip to the next bullet. If you do choose to forward past emails, fill out the section that pops up titled "<b>One-Time Forwarding of All Past OT Beat Report Emails from This Account</b>" with the following information:
+                        </p>
+                        <ul>
+                            <li>
+                                <p>
+                                    Enter the <b>email address</b> of your <b>usual Gmail account</b> (the forwarding account).
+                                </p>
+                            </li>
+                            <li>
+                                <p>
+                                    Enter the <b>password</b> of your <b>usual Gmail account</b>.
+                                </p>
+                            </li>
+                            <li>
+                                <p>
+                                    Confirm the <b>password</b> of your <b>usual Gmail account</b>.
+                                </p>
+                            </li>
+                            <li>
+                                <p>
+                                    Enter the <b>email address</b> of your <b><i>new</i> Gmail account</b> (the receiving account).
+                                </p>
+                            </li>
+                            <li>
+                                <p>
+                                    Leave the <b>mailbox</b> field <b>blank</b> (unless you receive the workout summary emails in a mailbox other than your inbox).
+                                </p>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <p>
+                            Fill out the section titled "<b>Get OT Beat Report Data from This Account</b>" with the following information:
+                        </p>
+                        <ul>
+                            <li>
+                                <p>
+                                    Enter the <b>email address</b> of your <b>new Gmail account</b>.
+                                </p>
+                            </li>
+                            <li>
+                                <p>
+                                    Enter the <b>password</b> of your <b>new Gmail account</b>.
+                                </p>
+                            </li>
+                            <li>
+                                <p>
+                                    Confirm the <b>password</b> of your <b>new Gmail account</b>.
+                                </p>
+                            </li>
+                            <li>
+                                <p>
+                                    Under "<b>Comma-separated originating email addresses</b>", enter <code>otbeatreport@orangetheoryfitness.com, </code> followed by the address of your <b><i>usual</i> Gmail account</b>.
+                                </p>
+                            </li>
+                            <li>
+                                <p>
+                                    Leave the <b>mailbox</b> field <b>blank</b> (unless you receive the workout summary emails in a mailbox other than your inbox).
+                                </p>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <p>
+                            Select the option to <b>only search for new workout summary emails</b> to make the program run <b>faster</b> in the future.
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            After filling out the information, <b>submit</b> the form.
+                        </p>
+                    </li>
+                </ul>
+            </li>
+        </ol>
         <p>
-            If you need any help with the instructions below, see:
+            The program will run and generate the data file, named <code>data.csv</code>, in the program directory, <code>otf_data</code>. Once the data file has been generated, <b>upload</b> it to the <a href="data.html">Data</a> page of this site. The data will be analyzed and presented to you.
+        </p>
+        <p>
+            Note:
         </p>
         <ul>
             <li>
-                <a href="https://support.apple.com/guide/terminal/execute-commands-and-run-tools-apdb66b5242-0d18-49fc-9c47-a2498b7c91d5/mac" target="_blank">Mac command line</a>
+                <p>
+                    If any records contained errors, they will be displayed and not included in the file.
+                </p>
             </li>
             <li>
-                <a href="https://ubuntu.com/tutorials/command-line-for-beginners#1-overview" target="_blank">Ubuntu command line</a>
-            </li>
-            <li>
-                <a href="https://docs.microsoft.com/en-us/powershell/scripting/overview?view=powershell-7.2" target="_blank">Windows PowerShell command line</a>
+                <p>
+                    If you <b>accidentally submitted incorrect information</b>, simply delete the <code>config.txt</code> file in the program directory (<code>otf_data</code>) and then run the program again.
+                </p>
             </li>
         </ul>
-        <ol>
-            <li>
-                <p>
-                    Run the following on the command line:
-                    <br>
-                    <code class="code_block">
-                        cd &ltprogram_directory_path&gt
-                        python3 otf_data.py
-                    </code>
-                    <br>
-                    where <code>&ltprogram_directory_path&gt</code> is the path to the program directory. For example, if you saved cloned the program into your home directory, this might be <code>~/otf_data</code>.
-                </p>
-            </li>
-            <li>
-                Once you run the program for the first time, a configuration menu will appear. The <b>first checkbox</b> asks whether you want to <b>forward past emails</b> to your new account:
-                <h4>Choosing to Forward</h4>
-                <p>
-                    <b>If you choose to forward past emails</b>, fill out the first section, titled "<b>One-Time Forwarding of All Past OT Beat Report Emails from This Account</b>", in the following way:
-                </p>
-                <ul>
-                    <li>
-                        <p>
-                            Enter the <b>email address</b> of your <b>usual Gmail account</b> (the <b>forwarding</b> account).
-                        </p>
-                    </li>
-                    <li>
-                        <p>
-                            Enter the <b>password</b> of your <b>usual Gmail account</b> (the <b>forwarding</b> account).
-                        </p>
-                    </li>
-                    <li>
-                        <p>
-                            Confirm the <b>password</b> of your <b>usual Gmail account</b> (the <b>forwarding</b> account).
-                        </p>
-                    </li>
-                    <li>
-                        <p>
-                            Enter the <b>email address</b> of your <b>new Gmail account</b> (the <b>receiving</b> account).
-                        </p>
-                    </li>
-                </ul>
-                <p>
-                    Now fill out the next section, titled "<b>Then Receive Them Here and Get OT Beat Report Data from This Account</b>", in the following way:
-                </p>
-                <ul>
-                    <li>
-                        <p>
-                            Enter the <b>email address</b> of your <b>new Gmail account</b>.
-                        </p>
-                    </li>
-                    <li>
-                        <p>
-                            Enter the <b>password</b> of your <b>new Gmail account</b>.
-                        </p>
-                    </li>
-                    <li>
-                        <p>
-                            Confirm the <b>password</b> of your <b>new Gmail account</b>.
-                        </p>
-                    </li>
-                    <li>
-                        <p>
-                            Under "<b>Comma-separated originating email addresses</b>", enter <code>otbeatreport@orangetheoryfitness.com, </code> (including the comma) followed by the address of your <b><i>usual</i> Gmail account</b>.
-                        </p>
-                    </li>
-                </ul>
-                <h4>Not Choosing to Forward</h4>
-                <p>
-                    <b>If you choose not to forward</b>, fill out the section titled "<b>Get OT Beat Report Data from This Account</b>", in the following way:
-                </p>
-                <ul>
-                    <li>
-                        <p>
-                            Enter the <b>email address</b> of your <b>new Gmail account</b>.
-                        </p>
-                    </li>
-                    <li>
-                        <p>
-                            Enter the <b>password</b> of your <b>new Gmail account</b>.
-                        </p>
-                    </li>
-                    <li>
-                        <p>
-                            Confirm the <b>password</b> of your <b>new Gmail account</b>.
-                        </p>
-                    </li>
-                    <li>
-                        <p>
-                            Under "<b>Comma-separated originating email addresses</b>", enter <code>otbeatreport@orangetheoryfitness.com, </code> followed by the address of your <b><i>usual</i> Gmail account</b>.
-                        </p>
-                    </li>
-                </ul>
-                <p>
-                    Regardless of whether you choose to forward past emails or not, select the option to <b>only search for new workout summary emails</b> to make the program run <b>faster</b> in the future.
-                </p>
-                <p>
-                    After filling out the information, <b>submit</b> the form. The program will run and generate the data file, named <code>data.csv</code>, in the program directory, <code>otf_data</code>.
-                </p>
-                <p>
-                    Note:
-                </p>
-                <ul>
-                    <li>
-                        <p>
-                            If any records contained errors, they will be displayed and not included in the file.
-                        </p>
-                    </li>
-                    <li>
-                        <p>
-                            If you <b>accidentally submitted incorrect information</b>, simply <b>delete the</b> <code>config.txt</code> <b>file</b> in the program directory (<code>otf_data</code>) and then run the program again.
-                        </p>
-                    </li>
-                </ul>
-            </li>
-            <li>
-                <p>
-                    Once the data file has been generated, <b>upload</b> it to the <a href="data.html">Data</a> page of this site. The data will be analyzed and presented to you.
-                </p>
-            </li>
-        </ol>
         <h2 id="next-time">Next Time</h2>
         <p>
-            If you choose to leave two-factor authentication off and keep "less secure app" access turned on for your new Gmail account, in the future whenever you want to see your newest data on this site all you will need to do is:
+            Assuming you choose to leave two-factor authentication off and keep "less secure app" access turned on for your new Gmail account, in the future whenever you want to see your newest data on this site all you will need to do is:
         </p>
         <ol>
             <li>
                 <p>
-                    <b>Run</b> the program on the command line (you will <b>not</b> have to complete the configuration again):
-                    <br>
-                    <code class="code_block">
-                        cd &ltprogram_directory_path&gt
-                        python3 otf_data.py
-                    </code>
-                    <br>
-                    where <code>&ltprogram_directory_path&gt</code> is the path to the program directory. For example, if you installed the program in your home directory, this might be <code>~/otf_data</code>.
+                    <b>Running the program</b> after the first time can be done in either of <b>two</b> ways (but only the <b>first</b> way if you use Windows):
                 </p>
+                <ul>
+                    <li>
+                        <p>
+                            <b>Open a terminal and run</b> the following on the <a href="help.html#using-the-command-line">command line</a> (you will <b>not</b> have to complete the configuration again):
+                            <br>
+                            <code class="code_block">
+                                cd &ltprogram_directory_path&gt
+                                python3 otf_data.py
+                            </code>
+                            <br>
+                            where <code>&ltprogram_directory_path&gt</code> is the path to the program directory. For example, if you installed the program in your <b>home directory</b>, the line would be:
+                            <br>
+                            <code class="code_block">
+                                cd ~/otf_data
+                            </code>
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            <b>Alternatively, use the provided</b> <a href="help.html#using-the-run-script">run script</a> (Mac or Linux only).
+                        </p>
+                    </li>
+                </ul>
             </li>
             <li>
                 <p>
