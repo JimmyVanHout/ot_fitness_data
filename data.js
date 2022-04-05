@@ -479,20 +479,12 @@ function showCoachesData(heading=null, rows=null) {
 }
 
 function drawCoachesBarChart(coachesAndCounts) {
-    let labels = coachesAndCounts.map((x) => {
-        let match = x[0].match(/(.+) (\((?:.*)?\))/);
-        if (match) {
-            return [match[1], match[2]];
-        } else {
-            return x[0];
-        }
-    });
     let canvas = document.getElementById("graph");
     Chart.getChart("graph")?.destroy();
     let chart = new Chart(canvas, {
         type: "bar",
         data: {
-            labels: labels,
+            labels: coachesAndCounts.map(x => x[0]),
             datasets: [{
                 label: "Classes",
                 data: coachesAndCounts.map(x => x[1]),
@@ -806,31 +798,33 @@ function drawChart(independentVars, dependentVars, mean, stdDev) {
 
 function showRightSideSelectors(heading=null, rows=null) {
     let rightSideSelectorsCtnr = document.getElementById("graph_selector_form_right");
-    rightSideSelectorsCtnr.hidden = false;
-    if (!heading || !rows) {
-        heading = JSON.parse(localStorage["heading"]);
-        rows = JSON.parse(localStorage["rows"]);
-    }
-    let prettyHeading = null;
-    if (!localStorage["prettyHeading"]) {
-        prettyHeading = getPrettyHeading(heading);
-        localStorage["prettyHeading"] = JSON.stringify(prettyHeading);
-    } else {
-        prettyHeading = JSON.parse(localStorage["prettyHeading"]);
-    }
-    for (let i = 9; i < prettyHeading.length; i++) {
-        let radioInput = document.createElement("input");
-        radioInput.type = "radio";
-        radioInput.id = heading[i].concat("_selector");
-        radioInput.name = "data_selector";
-        radioInput.value = heading[i];
-        radioInput.addEventListener("click", display);
-        rightSideSelectorsCtnr.appendChild(radioInput);
-        let label = document.createElement("label");
-        label.for = radioInput.id;
-        label.innerText = prettyHeading[i];
-        rightSideSelectorsCtnr.appendChild(label);
-        rightSideSelectorsCtnr.appendChild(document.createElement("br"));
+    if (rightSideSelectorsCtnr.children.length == 0) {
+        rightSideSelectorsCtnr.hidden = false;
+        if (!heading || !rows) {
+            heading = JSON.parse(localStorage["heading"]);
+            rows = JSON.parse(localStorage["rows"]);
+        }
+        let prettyHeading = null;
+        if (!localStorage["prettyHeading"]) {
+            prettyHeading = getPrettyHeading(heading);
+            localStorage["prettyHeading"] = JSON.stringify(prettyHeading);
+        } else {
+            prettyHeading = JSON.parse(localStorage["prettyHeading"]);
+        }
+        for (let i = 9; i < prettyHeading.length; i++) {
+            let radioInput = document.createElement("input");
+            radioInput.type = "radio";
+            radioInput.id = heading[i].concat("_selector");
+            radioInput.name = "data_selector";
+            radioInput.value = heading[i];
+            radioInput.addEventListener("click", display);
+            rightSideSelectorsCtnr.appendChild(radioInput);
+            let label = document.createElement("label");
+            label.for = radioInput.id;
+            label.innerText = prettyHeading[i];
+            rightSideSelectorsCtnr.appendChild(label);
+            rightSideSelectorsCtnr.appendChild(document.createElement("br"));
+        }
     }
 }
 
