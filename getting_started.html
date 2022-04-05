@@ -25,12 +25,29 @@
         </div>
         <br>
         <h1>Getting Started</h1>
-        <h2>About</h2>
+        <ul id="contents" class="list_with_space">
+            <li><a href="#about">About</a></li>
+            <li><a href="#first-time">First Time</a></li>
+            <li><a href="#next-time">Next Time</a></li>
+        </ul>
+        <h2 id="about">About</h2>
         <p>
-            This site analyzes the data from your OrangeTheory Fitness workout summary emails (emails from <code>otbeatreport@orangetheoryfitness.com</code>) and displays the results. It runs entirely in your browser, so <b>your data stays on your computer</b>--it is not sent to a server. <b>Note that this site is not affiliated with OrangeTheory Fitness.</b>
+            This site analyzes the data from your OrangeTheory Fitness workout summary emails (emails from <code>otbeatreport@orangetheoryfitness.com</code>) and displays the results. <b>Note that this site is not affiliated with OrangeTheory Fitness.</b> Highlights:
         </p>
+        <ul>
+            <li>
+                <p>
+                    It runs entirely in your browser, so <b>your data stays on your computer</b>--it is not sent to a server.
+                </p>
+            </li>
+            <li>
+                <p>
+                    The program that reads the email data <b>currently only works with Gmail email accounts</b>.
+                </p>
+            </li>
+        </ul>
         <p>
-            Whenever you want to see your newest data on this site, you will:
+            <b>How it works:</b> Whenever you want to see your newest data on this site, you will:
         </p>
         <ol>
             <li>
@@ -49,7 +66,34 @@
         </p>
         <h2 id="first-time">First Time</h2>
         <p>
-            The first time you want to run the data-extracting program and upload your data, you will <b>create a new Gmail account</b> to use only for your workout summary emails. <b><i>Past</i> emails can be forwarded</b> from your usual account to this new account using the <b>data-extracting program</b> (currently only works to forward from <b>Gmail</b> accounts). <b><i>Future</i> emails can be forwarded</b> using a <b>Gmail filter</b> on your usual account. After you <b>run the program</b>, you will <b>upload</b> the newly created data file to this site, which will analyze and display the data for you.
+            The first time you want to run the data-extracting program and upload your data, you will be:
+            <ul>
+                <li>
+                    <p>
+                        Creating a <b>new Gmail account</b> to use only for your workout summary emails
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        <b>Forwarding <i>past</i> emails</b> from your usual account to the new account using the <b>data-extracting program</b> (currently only works to forward from <b>Gmail</b> accounts)
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        <b>Forwarding <i>future</i></b> emails using a <b>Gmail filter</b> set up on your usual account
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        <b>Running</b> the program
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        <b>Uploading</b> the newly created data file to this site, which will analyze and display the data for you
+                    </p>
+                </li>
+            </ul>
         </p>
         <p>
             The program extracts the workout data from the emails to a CSV file. For a more detailed overview of how the program works, read the <a href="https://github.com/JimmyVanHout/otf_data" target="_blank">README file</a> (the next several steps are from that document). Important to note:
@@ -58,6 +102,11 @@
             <li>
                 <p>
                     To avoid potential loss of data, <b>keep the program files within the program directory</b> (this is because the program writes the files <code>config.txt</code> and <code>data.csv</code> and will overwrite any existing files with these names in the same directory).
+                </p>
+            </li>
+            <li>
+                <p>
+                    <b>Do not modify the program files, including the program directory, in any way</b>. For example, do not rename the program directory.
                 </p>
             </li>
             <li>
@@ -76,7 +125,7 @@
         <ol>
             <li>
                 <p>
-                    Create a <a href="https://support.google.com/mail/answer/56256?hl=en" target="_blank">new Gmail account</a>. This account will be used to receive the workout summary emails forwarded from your usual account. While creating a new account is not absolutely necessary, for security considerations and ease of use this is strongly recommended.
+                    Create a <a href="https://support.google.com/mail/answer/56256?hl=en" target="_blank">new Gmail account</a>. This account should be used <b>only</b> to receive the workout summary emails forwarded from your usual account.
                 </p>
             </li>
             <li>
@@ -140,7 +189,7 @@
                         python3 otf_data.py
                     </code>
                     <br>
-                    where <code>&ltprogram_directory_path&gt</code> is the path to the program directory. For example, if you installed the program in your <b>home directory</b>, the line would be:
+                    where <code>&ltprogram_directory_path&gt</code> is the path to the program directory. For example, if you installed the program in your <b>home directory</b>, the <b>first line</b> would be:
                     <br>
                     <code class="code_block">
                         cd ~/otf_data
@@ -204,7 +253,7 @@
                             </li>
                             <li>
                                 <p>
-                                    Under "<b>Comma-separated originating email addresses</b>", enter <code>otbeatreport@orangetheoryfitness.com, </code> followed by the address of your <b><i>usual</i> Gmail account</b>.
+                                    Under "<b>Comma-separated originating email addresses</b>", enter <code>otbeatreport@orangetheoryfitness.com, </code> (including the comma) followed by the address of your <b><i>usual</i> Gmail account</b>.
                                 </p>
                             </li>
                             <li>
@@ -236,7 +285,7 @@
         <ul>
             <li>
                 <p>
-                    If any records contained errors, they will be displayed and not included in the file.
+                    If any records contained <b>errors</b>, they will printed to standard output and not included in the file.
                 </p>
             </li>
             <li>
@@ -252,13 +301,10 @@
         <p>
             <b>Example video:</b> You can watch <a href="https://www.youtube.com/watch?v=jleMB2rmdlQ" target="_blank">this example video</a> of how to run the program after you have already run it once before.
         </p>
-        <p>
-            Choose <b>one</b> of the options below:
-        </p>
         <ol>
             <li>
                 <p>
-                    <b>Running the program</b> after the first time can be done in either of <b>two</b> ways (but only the <b>first</b> way if you use Windows):
+                    <b>Running the program</b> after the first time can be done in either of <b>two</b> ways (but only the <b>first</b> way if you use Windows), so choose <b>one</b> of the following:
                 </p>
                 <ul>
                     <li>
@@ -270,7 +316,7 @@
                                 python3 otf_data.py
                             </code>
                             <br>
-                            where <code>&ltprogram_directory_path&gt</code> is the path to the program directory. For example, if you installed the program in your <b>home directory</b>, the line would be:
+                            where <code>&ltprogram_directory_path&gt</code> is the path to the program directory. For example, if you installed the program in your <b>home directory</b>, the <b>first line</b> would be:
                             <br>
                             <code class="code_block">
                                 cd ~/otf_data
