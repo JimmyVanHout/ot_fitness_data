@@ -47,6 +47,9 @@ h4 {
     justify-items: start;
     background-color: #ED7010;
 }
+#intro_video_container {
+    text-align: center;
+}
 #footer {
     text-align: center;
 }
