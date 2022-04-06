@@ -45,24 +45,37 @@
         <div id="analysis_container" hidden>
             <br>
             <form id="graph_selector_form">
-                <div id="graph_selector_form_left">
-                    <input type="radio" id="zones_averages_selector" name="data_selector" value="zones_averages" checked>
-                    <label for="zones_averages_selector">Mean Minutes Per Zone</label>
-                    <br>
-                    <input type="radio" id="zones_totals_selector" name="data_selector" value="zones_totals">
-                    <label for="zones_totals_selector">Total Minutes Per Zone</label>
-                    <br>
-                    <input type="radio" id="coaches_selector" name="data_selector" value="coaches">
-                    <label for="coaches_selector">Coaches</label>
-                    <br>
-                    <input type="radio" id="locations_selector" name="data_selector" value="locations">
-                    <label for="locations_selector">Locations</label>
+                <div id="graph_selector_main_container">
+                    <p class="graph_selectors_title">Main Stats:</p>
+                    <div id="graph_selector_form_main">
+                        <input type="radio" id="zones_averages_selector" name="data_selector" value="zones_averages" checked>
+                        <label for="zones_averages_selector">Mean Minutes Per Zone</label>
+                        <br>
+                        <input type="radio" id="zones_totals_selector" name="data_selector" value="zones_totals">
+                        <label for="zones_totals_selector">Total Minutes Per Zone</label>
+                        <br>
+                        <input type="radio" id="coaches_selector" name="data_selector" value="coaches">
+                        <label for="coaches_selector">Coaches</label>
+                        <br>
+                        <input type="radio" id="locations_selector" name="data_selector" value="locations">
+                        <label for="locations_selector">Locations</label>
+                        <br>
+                    </div>
                 </div>
-                <div id="graph_selector_form_right">
+                <div id="graph_selector_form_treadmill_container">
+                    <p class="graph_selectors_title">Treadmill:</p>
+                    <div id="graph_selector_form_treadmill">
+                    </div>
+                </div>
+                <div id="graph_selector_form_rower_container">
+                    <p class="graph_selectors_title">Rower:</p>
+                    <div id="graph_selector_form_rower">
+                    </div>
                 </div>
             </form>
             <br>
             <form id="period_selector_form">
+                <span class="graph_selectors_title">Period: </span>
                 <input type="radio" id="period_all_time_selector" name="period_selector" value="all_time" checked>
                 <label for="period_all_time_selector">All Time</label>
                 <input type="radio" id="period_past_year_selector" name="period_selector" value="past_year">
@@ -72,6 +85,7 @@
                 <input type="radio" id="period_past_week_selector" name="period_selector" value="past_week">
                 <label for="period_past_month_selector">Past Week</label>
             </form>
+            <br>
             <h2 id="graph_description">Mean Minutes Per Zone</h2>
             <div id="no_data_message_container" hidden>
                 <p id="no_data_message">No data</p>

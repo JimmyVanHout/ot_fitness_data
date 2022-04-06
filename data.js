@@ -152,7 +152,7 @@ function formatSeconds(seconds) {
 }
 
 function validateHeading(heading) {
-    let correctHeading = ["location", "date", "start_time", "coach", "grey_zone", "blue_zone", "green_zone", "orange_zone", "red_zone", "calories", "splat_points", "avg_heart_rate", "max_heart_rate", "num_steps", "treadmill_distance", "treadmill_time", "avg_velocity", "max_velocity", "avg_incline", "max_incline", "avg_pace", "max_pace", "elevation", "rower_distance", "rower_time", "rower_avg_power", "rower_max_power", "rower_avg_velocity", "rower_max_velocity", "rower_500m_split_avg_pace", "rower_500m_split_max_pace", "rower_avg_stroke_rate"];
+    let correctHeading = ["location", "date", "start_time", "coach", "grey_zone", "blue_zone", "green_zone", "orange_zone", "red_zone", "calories", "splat_points", "avg_heart_rate", "max_heart_rate", "treadmill_num_steps", "treadmill_distance", "treadmill_time", "treadmill_avg_velocity", "treadmill_max_velocity", "treadmill_avg_incline", "treadmill_max_incline", "treadmill_avg_pace", "treadmill_max_pace", "treadmill_elevation", "rower_distance", "rower_time", "rower_avg_power", "rower_max_power", "rower_avg_velocity", "rower_max_velocity", "rower_500m_split_avg_pace", "rower_500m_split_max_pace", "rower_avg_stroke_rate"];
     if (heading.length != correctHeading.length) {
         return false;
     }
@@ -292,7 +292,7 @@ async function getNewData() {
         document.getElementById("error_message_container").hidden = true;
         document.getElementById("analysis_container").hidden = false;
         document.getElementById("zones_averages_selector").checked = true;
-        showRightSideSelectors(heading, rows);
+        showValueByTimeSelectors(heading, rows);
         showZonesAveragesData(heading, rows);
         showAllDataTable(heading, rows);
     } else {
@@ -796,34 +796,54 @@ function drawChart(independentVars, dependentVars, mean, stdDev) {
     });
 }
 
-function showRightSideSelectors(heading=null, rows=null) {
-    let rightSideSelectorsCtnr = document.getElementById("graph_selector_form_right");
-    if (rightSideSelectorsCtnr.children.length == 0) {
-        rightSideSelectorsCtnr.hidden = false;
-        if (!heading || !rows) {
-            heading = JSON.parse(localStorage["heading"]);
-            rows = JSON.parse(localStorage["rows"]);
+function addSelector(value, prettyValue, containerID) {
+    let container = document.getElementById(containerID);
+    let radioInput = document.createElement("input");
+    radioInput.type = "radio";
+    radioInput.id = value.concat("_selector");
+    radioInput.name = "data_selector";
+    radioInput.value = value;
+    radioInput.addEventListener("click", display);
+    container.appendChild(radioInput);
+    let label = document.createElement("label");
+    label.htmlFor = radioInput.id;
+    label.innerText = " ".concat(prettyValue);
+    container.appendChild(label);
+    container.appendChild(document.createElement("br"));
+}
+
+function showValueByTimeSelectors(heading=null, rows=null) {
+    let mainSelectorsCntr = document.getElementById("graph_selector_form_main");
+    let treadmillSelectorsCntr = document.getElementById("graph_selector_form_treadmill");
+    let rowerSelectorsCntr = document.getElementById("graph_selector_form_rower");
+    if (!heading || !rows) {
+        heading = JSON.parse(localStorage["heading"]);
+        rows = JSON.parse(localStorage["rows"]);
+    }
+    let prettyHeading = null;
+    if (!localStorage["prettyHeading"]) {
+        prettyHeading = getPrettyHeading(heading);
+        localStorage["prettyHeading"] = JSON.stringify(prettyHeading);
+    } else {
+        prettyHeading = JSON.parse(localStorage["prettyHeading"]);
+    }
+    if (Array.from(mainSelectorsCntr.children).reduce(((acc, x) => (x.type == "radio") ? acc + 1 : acc), 0) <= 4) {
+        for (let i = 9; i < 12; i++) {
+            addSelector(heading[i], prettyHeading[i], "graph_selector_form_main");
         }
-        let prettyHeading = null;
-        if (!localStorage["prettyHeading"]) {
-            prettyHeading = getPrettyHeading(heading);
-            localStorage["prettyHeading"] = JSON.stringify(prettyHeading);
-        } else {
-            prettyHeading = JSON.parse(localStorage["prettyHeading"]);
+    }
+    if (treadmillSelectorsCntr.children.length == 0) {
+        for (let i = 12; i < heading.length; i++) {
+            if (heading[i].includes("treadmill")) {
+                addSelector(heading[i], prettyHeading[i].replace("Treadmill ", ""), "graph_selector_form_treadmill");
+            }
         }
-        for (let i = 9; i < prettyHeading.length; i++) {
-            let radioInput = document.createElement("input");
-            radioInput.type = "radio";
-            radioInput.id = heading[i].concat("_selector");
-            radioInput.name = "data_selector";
-            radioInput.value = heading[i];
-            radioInput.addEventListener("click", display);
-            rightSideSelectorsCtnr.appendChild(radioInput);
-            let label = document.createElement("label");
-            label.for = radioInput.id;
-            label.innerText = prettyHeading[i];
-            rightSideSelectorsCtnr.appendChild(label);
-            rightSideSelectorsCtnr.appendChild(document.createElement("br"));
+    }
+    if (rowerSelectorsCntr.children.length == 0) {
+        for (let i = 0; i < heading.length; i++) {
+            if (heading[i].includes("rower")) {
+                addSelector(heading[i], prettyHeading[i].replace("Rower ", ""), "graph_selector_form_rower");
+            }
         }
     }
 }
@@ -1051,7 +1071,7 @@ function main() {
         document.getElementById("analysis_container").hidden = false;
         let heading = JSON.parse(localStorage["heading"]);
         let rows = JSON.parse(localStorage["rows"]);
-        showRightSideSelectors(heading, rows);
+        showValueByTimeSelectors(heading, rows);
         showZonesAveragesData(heading, rows);
         showAllDataTable(heading, rows);
     }
