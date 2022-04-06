@@ -28,12 +28,18 @@
         <ul id="contents" class="list_with_space">
             <li><a href="#about">About</a></li>
             <li><a href="#first-time">First Time</a></li>
+            <ul class="list_with_space">
+                <li><a href="#set-up-the-gmail-configuration">Set Up the Gmail Configuration</a></li>
+                <li><a href="#install-the-program-and-dependencies">Install the Program and Dependencies</a></li>
+                <li><a href="#run-and-configure-the-program">Run and Configure the Program</a></li>
+            </ul>
             <li><a href="#next-time">Next Time</a></li>
         </ul>
         <h2 id="about">About</h2>
         <p>
-            This site analyzes the data from your OrangeTheory Fitness workout summary emails (emails from <code>otbeatreport@orangetheoryfitness.com</code>) and displays the results. <b>Note that this site is not affiliated with OrangeTheory Fitness.</b> Highlights:
+            This site analyzes the data from your OrangeTheory Fitness workout summary emails (emails from <code>otbeatreport@orangetheoryfitness.com</code>) and displays the results. <b>Note that this site is not affiliated with OrangeTheory Fitness.</b>
         </p>
+        <h3>Highlights</h3>
         <ul>
             <li>
                 <p>
@@ -46,8 +52,9 @@
                 </p>
             </li>
         </ul>
+        <h3>How it Works</h3>
         <p>
-            <b>How it works:</b> Whenever you want to see your newest data on this site, you will:
+            Whenever you want to see your newest data on this site, you will:
         </p>
         <ol>
             <li>
@@ -70,17 +77,17 @@
             <ul>
                 <li>
                     <p>
-                        Creating a <b>new Gmail account</b> to use only for your workout summary emails
+                        <b>Creating a new Gmail account</b> for your workout summary emails
                     </p>
                 </li>
                 <li>
                     <p>
-                        <b>Forwarding <i>past</i> emails</b> from your usual account to the new account using the <b>data-extracting program</b> (currently only works to forward from <b>Gmail</b> accounts)
+                        <b>Forwarding <i>past</i> emails</b> from your usual account to the new account using the <b>data-extracting program</b>
                     </p>
                 </li>
                 <li>
                     <p>
-                        <b>Forwarding <i>future</i></b> emails using a <b>Gmail filter</b> set up on your usual account
+                        <b>Forwarding <i>future</i> emails</b> using a <b>Gmail filter</b> set up on your usual account
                     </p>
                 </li>
                 <li>
@@ -98,7 +105,7 @@
         <p>
             The program extracts the workout data from the emails to a CSV file. For a more detailed overview of how the program works, read the <a href="https://github.com/JimmyVanHout/otf_data" target="_blank">README file</a> (the next several steps are from that document). Important to note:
         </p>
-        <ol>
+        <ul>
             <li>
                 <p>
                     To avoid potential loss of data, <b>keep the program files within the program directory</b> (this is because the program writes the files <code>config.txt</code> and <code>data.csv</code> and will overwrite any existing files with these names in the same directory).
@@ -109,18 +116,15 @@
                     <b>Do not modify the program files, including the program directory, in any way</b>. For example, do not rename the program directory.
                 </p>
             </li>
-        </ol>
-        <p>
-            <b>Example video:</b> After completing the steps in the following section "Set up the Gmail Configuration", you can watch <a href="https://www.youtube.com/watch?v=5K8vG1rOaGs" target="_blank">this example video</a> of how to complete the steps in the subsequent sections "Installing the Program and Dependencies" (video doesn't show step 1) and "Running the Program".
-        </p>
+        </ul>
         <p>
             Follow the steps below to get started:
         </p>
-        <h3>Set up the Gmail Configuration</h3>
+        <h3 id="set-up-the-gmail-configuration">Set up the Gmail Configuration</h3>
         <ol>
             <li>
                 <p>
-                    Create a <a href="https://support.google.com/mail/answer/56256?hl=en" target="_blank">new Gmail account</a>. This account should be used <b>only</b> to receive the workout summary emails forwarded from your usual account.
+                    Create a <a href="https://support.google.com/mail/answer/56256?hl=en" target="_blank">new Gmail account</a>. For security purposes, it is recommended that this account should be used only to receive the workout summary emails forwarded from your usual account.
                 </p>
             </li>
             <li>
@@ -130,22 +134,19 @@
             </li>
             <li>
                 <p>
-                    In order for the data-extracting program to be able to read from the new Gmail account, you must <a href="https://support.google.com/accounts/answer/1064203?hl=en&co=GENIE.Platform%3DDesktop" target="_blank">disable two-factor authentication</a> and <a href="https://support.google.com/accounts/answer/6010255?hl=en" target="_blank">enable "less secure app" access</a> on the new account in the <a href="https://myaccount.google.com/intro/security" target="_blank">security settings</a> for that account.
+                    In order for the data-extracting program to be able to read from the new Gmail account, you must create an <a href="https://support.google.com/mail/answer/185833?hl=en-GB" target="_blank">application-specific password</a> for this account and use this when prompted for a password whenever you run the program.
                 </p>
             </li>
             <li>
                 <p>
-                    (Optional) If you choose to forward <i>past</i> workout summary emails to your new account (in a later step), then you must <b>temporarily</b> <a href="https://support.google.com/accounts/answer/1064203?hl=en&co=GENIE.Platform%3DDesktop" target="_blank">disable two-factor authentication</a> and <a href="https://support.google.com/accounts/answer/6010255?hl=en" target="_blank">enable "less secure app" access</a> in the <a href="https://myaccount.google.com/intro/security" target="_blank">security settings</a> of the account you wish to forward them from (that is, the account that typically receives the emails). Remember that the forwarding feature can currently only forward from Gmail accounts.
-                </p>
-                <p>
-                    <b>Only do this if you are comfortable with the security risk this presents</b>, and once you have finished running the program for the first time following the steps below, <b>immediately revert the security settings back to normal</b> by <a href="https://support.google.com/accounts/answer/6010255?hl=en" target="_blank">disabling "less secure app" access</a> and <a href="https://www.google.com/landing/2step/" target="_blank">re-enabling two-factor authentication</a> for this account.
-                </p>
-                <p>
-                    You will only need to toggle these settings once for this account since the forwarding feature is only performed once by the program to forward all <i>past</i> emails. The Gmail filter you set up earlier will take care of forwarding all <i>future</i> emails.
+                    (Optional) If you choose to forward <i>past</i> workout summary emails to your new account (in a later step), then you must create an <a href="https://support.google.com/mail/answer/185833?hl=en-GB" target="_blank">application-specific password</a> for this account as well. You can <a href="https://support.google.com/accounts/answer/1070455?hl=en" target="_blank">delete</a> this password after you have used it to configure the program the first time you run it.
                 </p>
             </li>
         </ol>
-        <h3>Install the Program and Dependencies</h3>
+        <h3 id="install-the-program-and-dependencies">Install the Program and Dependencies</h3>
+        <p>
+            <b>Example video:</b> The first part of this <a href="https://www.youtube.com/watch?v=5K8vG1rOaGs" target="_blank">example video</a> demonstrates how to complete the <i>second</i> step in this section, after you have already completed the first step of installing the latest version of Python.
+        </p>
         <ol>
             <li>
                 <p>
@@ -173,7 +174,10 @@
                 </p>
             </li>
         </ol>
-        <h3>Run and Configure the Program</h3>
+        <h3 id="run-and-configure-the-program">Run and Configure the Program</h3>
+        <p>
+            <b>Example video:</b> The second part of this <a href="https://www.youtube.com/watch?v=5K8vG1rOaGs" target="_blank">example video</a> demonstrates how to complete all the steps in this section, namely running the program for the first time and configuring it.
+        </p>
         <ol>
             <li>
                 <p>
@@ -206,12 +210,12 @@
                             </li>
                             <li>
                                 <p>
-                                    Enter the <b>password</b> of your <b>usual Gmail account</b>.
+                                    Enter the <b>application-specific password</b> you created for your <b>usual Gmail account</b>.
                                 </p>
                             </li>
                             <li>
                                 <p>
-                                    Confirm the <b>password</b> of your <b>usual Gmail account</b>.
+                                    Confirm the <b>application-specific password</b> you created for your <b>usual Gmail account</b>.
                                 </p>
                             </li>
                             <li>
@@ -238,12 +242,12 @@
                             </li>
                             <li>
                                 <p>
-                                    Enter the <b>password</b> of your <b>new Gmail account</b>.
+                                    Enter the <b>application-specific password</b> you created for your <b>new Gmail account</b>.
                                 </p>
                             </li>
                             <li>
                                 <p>
-                                    Confirm the <b>password</b> of your <b>new Gmail account</b>.
+                                    Confirm the <b>application-specific password</b> you created for your <b>new Gmail account</b>.
                                 </p>
                             </li>
                             <li>
@@ -291,9 +295,6 @@
         </ul>
         <h2 id="next-time">Next Time</h2>
         <p>
-            Assuming you choose to leave two-factor authentication off and keep "less secure app" access turned on for your new Gmail account, in the future whenever you want to see your newest data on this site all you will need to do is listed below.
-        </p>
-        <p>
             <b>Example video:</b> You can watch <a href="https://www.youtube.com/watch?v=jleMB2rmdlQ" target="_blank">this example video</a> of how to run the program after you have already run it once before.
         </p>
         <ol>
@@ -331,9 +332,6 @@
                 </p>
             </li>
         </ol>
-        <p>
-            You may you choose to turn on two-factor authentication and turn off "less secure app" access after you run the data-extracting program, just note that you will need to change these settings whenever you want to run the program in the future.
-        </p>
         <br>
         <div id="footer">
             <p id="copyright_text">&copy 2022 <a href="https://github.com/JimmyVanHout" target="_blank">Jimmy Van Hout</a></p>
