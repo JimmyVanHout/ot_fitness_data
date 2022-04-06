@@ -28,7 +28,7 @@
         <ul id="contents" class="list_with_space">
             <li><a href="#modern-browsers">Modern Browsers</a></li>
             <li><a href="#using-the-command-line">Using the Command Line</a></li>
-            <li><a href="#using-the-run-script">Using the Run Script</a></li>
+            <li><a href="#using-a-run-script">Using a Run Script</a></li>
         </ul>
         <h2 id="modern-browsers">Modern Browsers</h2>
         <p>
@@ -63,7 +63,7 @@
                 <a href="https://docs.microsoft.com/en-us/powershell/scripting/overview?view=powershell-7.2" target="_blank">Windows PowerShell command line</a>
             </li>
         </ul>
-        <h2 id="using-the-run-script">Using the Run Script</h2>
+        <h2 id="using-a-run-script">Using a Run Script</h2>
         <p>
             If you need help with this section, see:
         </p>
@@ -76,23 +76,30 @@
             </li>
         </ul>
         <p>
-            Once you have already run the program for the first time, you may use the provided run script to make future runs as simple as double clicking a file on your desktop. This feature is limited to Mac and Linux operating systems.
+            Once you have already run the program for the first time, you can create a run script to make future runs as simple as double clicking a file on your desktop. The example demonstrated below is for Mac or Linux operating systems.
         </p>
         <p>
-            The run script will only work if you have installed the program directory in your <b>home directory</b> (that is, the path to the program directory must be <code>~/otf_data</code>). You can save the run script itself wherever you like, though.
+            The instructions below assume that you have installed the program directory in your <b>home directory</b> (that is, the path to the program directory is <code>~/otf_data</code>). Then <b>create a file</b> named <code>run_otf_data.sh</code> with the following contents:
+            <br>
+            <code class="code_block">
+                #!/bin/bash
+                
+                cd ~/otf_data
+                python3 otf_data.py
+            </code>
+            <br>
+            You can save this file wherever you like. Then proceed by following the instructions specific to your operating system below.
         </p>
         <p>
             <b>Example video:</b> You can watch this <a href="https://www.youtube.com/watch?v=RskwWq0aq5Q" target="_blank">example video</a> demonstrating how to download and configure the run script.
         </p>
-        <h3 id="using-the-run-script-on-mac">Using the Run Script on Mac</h3>
+        <h3 id="using-a-run-script-on-mac">Using a Run Script on Mac</h3>
         <ol class="list_with_space">
-            <li>Download the <a href="run.sh" download>run script</a>.</li>
             <li>Make the file <a href="https://support.apple.com/guide/terminal/make-a-file-executable-apdd100908f-06b3-4e63-8a87-32e71241bab4/mac" target="_blank">executable</a>.</li>
             <li>Choose to either just once or always <a href="https://support.apple.com/guide/mac-help/choose-an-app-to-open-a-file-on-mac-mh35597/mac" target="_blank">open this type of file</a> with the <code>Terminal</code> application.</li>
         </ol>
-        <h3 id="using-rthe-run-script-on-ubuntu">Using the Run Script on Ubuntu</h3>
+        <h3 id="using-a-run-script-on-ubuntu">Using a Run Script on Ubuntu</h3>
         <ol class="list_with_space">
-            <li>Download the <a href="run.sh" download>run script</a>.</li>
             <li>Make the file <a href="https://help.ubuntu.com/community/NautilusScriptsHowto" target="_blank">executable</a>.</li>
             <li>Choose to either just once or always <a href="https://help.ubuntu.com/stable/ubuntu-help/files-open.html.en" target="_blank">open this type of file</a> with the <code>Terminal</code> application.</li>
         </ol>
