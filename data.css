@@ -43,7 +43,7 @@ h4 {
 }
 .table_container {
     width: 100%;
-    max-height: 300px;
+    max-height: 190px;
     overflow: auto;
 }
 .stats_container {
@@ -125,10 +125,10 @@ h4 {
     column-gap: 5%;
 }
 #value_by_time_mean_description {
-    color: #108DED;
+    color: #DF10ED;
 }
 #value_by_time_std_dev_description {
-    color: #DF10ED;
+    color: #108DED;
 }
 #options_selector_form {
     line-height: 1.5;

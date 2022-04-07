@@ -855,25 +855,25 @@ function drawChart(independentVars, dependentVars, mean, stdDev, regressionYEnds
                         annotations: {
                             meanAnnotation: {
                                 type: "line",
-                                borderColor: "#108DED",
+                                borderColor: "#DF10ED",
                                 yMin: mean,
                                 yMax: mean,
                             },
                             stdDevAboveAnnotation: {
                                 type: "line",
-                                borderColor: "#DF10ED",
+                                borderColor: "#108DED",
                                 yMin: mean + stdDev,
                                 yMax: mean + stdDev,
                             },
                             stdDevBelowAnnotation: {
                                 type: "line",
-                                borderColor: "#DF10ED",
+                                borderColor: "#108DED",
                                 yMin: mean - stdDev,
                                 yMax: mean - stdDev,
                             },
                             regressionAnnotation: {
                                 type: "line",
-                                borderColor: "#1FED10",
+                                borderColor: "#10ED70",
                                 yMin: regressionYEnds[0], // yMin attribute does not necessarily indicate ymin, rather y value at first endpoint
                                 yMax: regressionYEnds[1], // yMax attribute does not necessarily indicate ymax, rather y value at second endpoint
                             }
@@ -902,19 +902,19 @@ function drawChart(independentVars, dependentVars, mean, stdDev, regressionYEnds
                         annotations: {
                             meanAnnotation: {
                                 type: "line",
-                                borderColor: "#108DED",
+                                borderColor: "#DF10ED",
                                 yMin: mean,
                                 yMax: mean,
                             },
                             stdDevAboveAnnotation: {
                                 type: "line",
-                                borderColor: "#DF10ED",
+                                borderColor: "#108DED",
                                 yMin: mean + stdDev,
                                 yMax: mean + stdDev,
                             },
                             stdDevBelowAnnotation: {
                                 type: "line",
-                                borderColor: "#DF10ED",
+                                borderColor: "#108DED",
                                 yMin: mean - stdDev,
                                 yMax: mean - stdDev,
                             },
