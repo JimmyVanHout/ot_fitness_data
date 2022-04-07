@@ -828,19 +828,19 @@ function showValueByTimeSelectors(heading=null, rows=null) {
         prettyHeading = JSON.parse(localStorage["prettyHeading"]);
     }
     if (Array.from(mainSelectorsCntr.children).reduce(((acc, x) => (x.type == "radio") ? acc + 1 : acc), 0) <= 4) {
-        for (let i = 9; i < 12; i++) {
+        for (let i = 9; i < 13; i++) {
             addSelector(heading[i], prettyHeading[i], "graph_selector_form_main");
         }
     }
     if (treadmillSelectorsCntr.children.length == 0) {
-        for (let i = 12; i < heading.length; i++) {
+        for (let i = 13; i < heading.length; i++) {
             if (heading[i].includes("treadmill")) {
                 addSelector(heading[i], prettyHeading[i].replace("Treadmill ", ""), "graph_selector_form_treadmill");
             }
         }
     }
     if (rowerSelectorsCntr.children.length == 0) {
-        for (let i = 0; i < heading.length; i++) {
+        for (let i = 13; i < heading.length; i++) {
             if (heading[i].includes("rower")) {
                 addSelector(heading[i], prettyHeading[i].replace("Rower ", ""), "graph_selector_form_rower");
             }
