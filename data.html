@@ -86,7 +86,10 @@
                 <label for="period_past_month_selector">Past Week</label>
             </form>
             <br>
-            <form id="regression_selector_form" hidden>
+            <form id="options_selector_form" hidden>
+                <input type="checkbox" id="hide_outside_std_devs_selector" name="hide_outside_std_devs_selector" value="hide_outside_std_devs">
+                <label for="hide_outside_std_devs_selector">Hide Values Outside 3 Standard Deviations</label>
+                <br>
                 <input type="checkbox" id="regression_selector" name="regression_selector" value="regression">
                 <label for="regression_selector" style="color: #1FED10;">Regression (Least Squares) Line</label>
             </form>

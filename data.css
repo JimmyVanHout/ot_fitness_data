@@ -130,3 +130,6 @@ h4 {
 #value_by_time_std_dev_description {
     color: #DF10ED;
 }
+#options_selector_form {
+    line-height: 1.5;
+}

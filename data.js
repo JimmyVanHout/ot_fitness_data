@@ -292,6 +292,8 @@ async function getNewData() {
         document.getElementById("error_message_container").hidden = true;
         document.getElementById("analysis_container").hidden = false;
         document.getElementById("zones_averages_selector").checked = true;
+        document.getElementById("hide_outside_std_devs_selector").checked = false;
+        document.getElementById("regression_selector").checked = false;
         showValueByTimeSelectors(heading, rows);
         showZonesAveragesData(heading, rows);
         showAllDataTable(heading, rows);
@@ -396,7 +398,7 @@ function clearPreviousData(removeFiles=true) {
 }
 
 function hideAll() {
-    document.getElementById("regression_selector_form").hidden = true;
+    document.getElementById("options_selector_form").hidden = true;
     document.getElementById("zones_averages_table").hidden = true;
     document.getElementById("zones_totals_table").hidden = true;
     document.getElementById("coaches_data_container").hidden = true;
@@ -657,8 +659,8 @@ function showValueByTime(value, heading=null, rows=null) {
         }
     }
     if (timesAndValues.length > 0) {
-        let regressionSelectorForm = document.getElementById("regression_selector_form");
-        regressionSelectorForm.hidden = false;
+        document.getElementById("options_selector_form").hidden = false;
+        let hideOutsideStdDevs = document.getElementById("hide_outside_std_devs_selector").checked;
         let showRegression = document.getElementById("regression_selector").checked;
         document.getElementById("graph_container").hidden = false;
         document.getElementById("value_by_time_data_container").hidden = false;
@@ -674,20 +676,47 @@ function showValueByTime(value, heading=null, rows=null) {
             mean = getMean(valuesInSeconds);
             stdDev = getStdDev(valuesInSeconds, mean);
             let regressionYEnds = null;
-            if (showRegression) {
-                drawChart(times, valuesInSeconds.map(x => x / 60), mean / 60, stdDev / 60, getRegressionYEnds(valuesInSeconds).map(x => x / 60));
+            let graphTimes = [];
+            let graphValues = [];
+            if (hideOutsideStdDevs) {
+                for (let i = 0; i < valuesInSeconds.length; i++) {
+                    if (valuesInSeconds[i] >= mean - 3 * stdDev && valuesInSeconds[i] <= mean + 3 * stdDev) {
+                        graphTimes.push(times[i]);
+                        graphValues.push(valuesInSeconds[i]);
+                    }
+                }
             } else {
-                drawChart(times, valuesInSeconds.map(x => x / 60), mean / 60, stdDev / 60);
+                graphTimes = times.slice();
+                graphValues = valuesInSeconds.slice();
+            }
+            graphValues = graphValues.map(x => x / 60);
+            if (showRegression) {
+                drawChart(graphTimes, graphValues, mean / 60, stdDev / 60, getRegressionYEnds(valuesInSeconds).map(x => x / 60));
+            } else {
+                drawChart(graphTimes, graphValues, mean / 60, stdDev / 60);
             }
             mean = formatSeconds(mean);
             stdDev = formatSeconds(stdDev);
         } else {
             mean = getMean(values, total);
             stdDev = getStdDev(values, mean);
-            if (showRegression) {
-                drawChart(times, values, mean, stdDev, getRegressionYEnds(values));
+            let graphTimes = [];
+            let graphValues = [];
+            if (hideOutsideStdDevs) {
+                for (let i = 0; i < values.length; i++) {
+                    if (values[i] >= mean - 3 * stdDev && values[i] <= mean + 3 * stdDev) {
+                        graphTimes.push(times[i]);
+                        graphValues.push(values[i]);
+                    }
+                }
             } else {
-                drawChart(times, values, mean, stdDev);
+                graphTimes = times.slice();
+                graphValues = values.slice();
+            }
+            if (showRegression) {
+                drawChart(graphTimes, graphValues, mean, stdDev, getRegressionYEnds(values));
+            } else {
+                drawChart(graphTimes, graphValues, mean, stdDev);
             }
             if (!Number.isInteger(total)) {
                 total = total.toFixed(2);
@@ -756,8 +785,6 @@ function getRegressionYEnds(yValues, xValues=null) {
     let regressionYEnds = new Array(2);
     regressionYEnds[0] = yIntercept + xValues[minIndexXValues] * slope;
     regressionYEnds[1] = yIntercept + xValues[maxIndexXValues] * slope;
-    console.log(slope);
-    console.log(yIntercept);
     return regressionYEnds;
 }
 
@@ -1162,6 +1189,7 @@ function main() {
             child.addEventListener("click", display);
         }
     }
+    document.getElementById("hide_outside_std_devs_selector").addEventListener("click", (() => display()));
     document.getElementById("regression_selector").addEventListener("click", (() => display()));
     let date = new Date();
     if (!localStorage["updateDate"]) {
@@ -1184,5 +1212,4 @@ function main() {
     }
 }
 
-console.log(getRegressionYEnds([46, 48, 51, 52.1, 54, 52, 59, 58.7, 61.6, 64, 61.4, 54.6, 58.8, 58], [132, 129, 120, 113.2, 105, 92, 84, 83.2, 88.4, 59, 80, 81.5, 71, 69.2]));
 main();
