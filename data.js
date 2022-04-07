@@ -396,6 +396,7 @@ function clearPreviousData(removeFiles=true) {
 }
 
 function hideAll() {
+    document.getElementById("regression_selector_form").hidden = true;
     document.getElementById("zones_averages_table").hidden = true;
     document.getElementById("zones_totals_table").hidden = true;
     document.getElementById("coaches_data_container").hidden = true;
@@ -607,7 +608,7 @@ function getSeconds(time) {
     return seconds;
 }
 
-function showValueByTime(heading=null, rows=null, value) {
+function showValueByTime(value, heading=null, rows=null) {
     hideAll();
     heading = heading ?? JSON.parse(localStorage["heading"]);
     rows = rows ?? JSON.parse(localStorage["rows"]);
@@ -656,6 +657,9 @@ function showValueByTime(heading=null, rows=null, value) {
         }
     }
     if (timesAndValues.length > 0) {
+        let regressionSelectorForm = document.getElementById("regression_selector_form");
+        regressionSelectorForm.hidden = false;
+        let showRegression = document.getElementById("regression_selector").checked;
         document.getElementById("graph_container").hidden = false;
         document.getElementById("value_by_time_data_container").hidden = false;
         document.getElementById("value_by_time_table_container").hidden = false;
@@ -669,13 +673,22 @@ function showValueByTime(heading=null, rows=null, value) {
             let valuesInSeconds = values.map(x => getSeconds(x));
             mean = getMean(valuesInSeconds);
             stdDev = getStdDev(valuesInSeconds, mean);
-            drawChart(times, valuesInSeconds.map(x => x / 60), mean / 60, stdDev / 60);
+            let regressionYEnds = null;
+            if (showRegression) {
+                drawChart(times, valuesInSeconds.map(x => x / 60), mean / 60, stdDev / 60, getRegressionYEnds(valuesInSeconds).map(x => x / 60));
+            } else {
+                drawChart(times, valuesInSeconds.map(x => x / 60), mean / 60, stdDev / 60);
+            }
             mean = formatSeconds(mean);
             stdDev = formatSeconds(stdDev);
         } else {
             mean = getMean(values, total);
             stdDev = getStdDev(values, mean);
-            drawChart(times, values, mean, stdDev);
+            if (showRegression) {
+                drawChart(times, values, mean, stdDev, getRegressionYEnds(values));
+            } else {
+                drawChart(times, values, mean, stdDev);
+            }
             if (!Number.isInteger(total)) {
                 total = total.toFixed(2);
                 mean = mean.toFixed(2);
@@ -702,6 +715,50 @@ function showValueByTime(heading=null, rows=null, value) {
         document.getElementById("no_data_message_container").hidden = false;
         document.getElementById("graph_container").hidden = true;
     }
+}
+
+function getRegressionYEnds(yValues, xValues=null) {
+    let minIndexXValues = maxIndexXValues = null;
+    if (!xValues) {
+        xValues = new Array(yValues.length);
+        for (let i = 0; i < yValues.length; i++) {
+            xValues[i] = i;
+        }
+        minIndexXValues = 0;
+        maxIndexXValues = xValues.length - 1;
+    } else {
+        let minValue = xValues[0];
+        let maxValue = xValues[0];
+        minIndexXValues = 0;
+        maxIndexXValues = 0;
+        for (let i = 1; i < xValues.length; i++) {
+            if (xValues[i] < minValue) {
+                minValue = xValues[i];
+                minIndexXValues = i;
+            } else if (xValues[i] > maxValue) {
+                maxValue = xValues[i];
+                maxIndexXValues = i;
+            }
+        }
+    }
+    let xMean = getMean(xValues);
+    let yMean = getMean(yValues);
+    let sxy = 0;
+    for (let i = 0; i < xValues.length; i++) {
+        sxy += (xValues[i] - xMean) * (yValues[i] - yMean);
+    }
+    let sxx = 0;
+    for (let i = 0; i < xValues.length; i++) {
+        sxx += Math.pow((xValues[i] - xMean), 2);
+    }
+    let slope = sxy / sxx;
+    let yIntercept = yMean - slope * xMean;
+    let regressionYEnds = new Array(2);
+    regressionYEnds[0] = yIntercept + xValues[minIndexXValues] * slope;
+    regressionYEnds[1] = yIntercept + xValues[maxIndexXValues] * slope;
+    console.log(slope);
+    console.log(yIntercept);
+    return regressionYEnds;
 }
 
 function shouldDisplayTotal(index) {
@@ -751,49 +808,98 @@ function addDependentVarsToTable(dependentVars, tableBodyID) {
     }
 }
 
-function drawChart(independentVars, dependentVars, mean, stdDev) {
+function drawChart(independentVars, dependentVars, mean, stdDev, regressionYEnds=null) {
     let canvas = document.getElementById("graph");
     Chart.getChart("graph")?.destroy();
-    let chart = new Chart(canvas, {
-        type: "line",
-        data: {
-            labels: independentVars,
-            datasets: [{
-                data: dependentVars,
-                backgroundColor: "#ED7010",
-                showLine: false,
-            }],
-        },
-        options: {
-            plugins: {
-                annotation: {
-                    annotations: {
-                        meanAnnotation: {
-                            type: "line",
-                            borderColor: "#10ED70",
-                            yMin: mean,
-                            yMax: mean,
-                        },
-                        stdDevAboveAnnotation: {
-                            type: "line",
-                            borderColor: "#7010ED",
-                            yMin: mean + stdDev,
-                            yMax: mean + stdDev,
-                        },
-                        stdDevBelowAnnotation: {
-                            type: "line",
-                            borderColor: "#7010ED",
-                            yMin: mean - stdDev,
-                            yMax: mean - stdDev,
+    if (regressionYEnds) {
+        let chart = new Chart(canvas, {
+            type: "line",
+            data: {
+                labels: independentVars,
+                datasets: [{
+                    data: dependentVars,
+                    backgroundColor: "#ED7010",
+                    showLine: false,
+                }],
+            },
+            options: {
+                plugins: {
+                    annotation: {
+                        annotations: {
+                            meanAnnotation: {
+                                type: "line",
+                                borderColor: "#108DED",
+                                yMin: mean,
+                                yMax: mean,
+                            },
+                            stdDevAboveAnnotation: {
+                                type: "line",
+                                borderColor: "#DF10ED",
+                                yMin: mean + stdDev,
+                                yMax: mean + stdDev,
+                            },
+                            stdDevBelowAnnotation: {
+                                type: "line",
+                                borderColor: "#DF10ED",
+                                yMin: mean - stdDev,
+                                yMax: mean - stdDev,
+                            },
+                            regressionAnnotation: {
+                                type: "line",
+                                borderColor: "#1FED10",
+                                yMin: regressionYEnds[0], // yMin attribute does not necessarily indicate ymin, rather y value at first endpoint
+                                yMax: regressionYEnds[1], // yMax attribute does not necessarily indicate ymax, rather y value at second endpoint
+                            }
                         },
                     },
+                    legend: {
+                        display: false,
+                    }
                 },
-                legend: {
-                    display: false,
-                }
             },
-        },
-    });
+        });
+    } else {
+        let chart = new Chart(canvas, {
+            type: "line",
+            data: {
+                labels: independentVars,
+                datasets: [{
+                    data: dependentVars,
+                    backgroundColor: "#ED7010",
+                    showLine: false,
+                }],
+            },
+            options: {
+                plugins: {
+                    annotation: {
+                        annotations: {
+                            meanAnnotation: {
+                                type: "line",
+                                borderColor: "#108DED",
+                                yMin: mean,
+                                yMax: mean,
+                            },
+                            stdDevAboveAnnotation: {
+                                type: "line",
+                                borderColor: "#DF10ED",
+                                yMin: mean + stdDev,
+                                yMax: mean + stdDev,
+                            },
+                            stdDevBelowAnnotation: {
+                                type: "line",
+                                borderColor: "#DF10ED",
+                                yMin: mean - stdDev,
+                                yMax: mean - stdDev,
+                            },
+                        },
+                    },
+                    legend: {
+                        display: false,
+                    }
+                },
+            },
+        });
+    }
 }
 
 function addSelector(value, prettyValue, containerID) {
@@ -1037,7 +1143,7 @@ function display() {
     } else if (dataSelector.value == "locations") {
         showLocationsData(heading, rows);
     } else {
-        showValueByTime(heading, rows, dataSelector.value);
+        showValueByTime(dataSelector.value, heading, rows);
     }
 }
 
@@ -1056,6 +1162,7 @@ function main() {
             child.addEventListener("click", display);
         }
     }
+    document.getElementById("regression_selector").addEventListener("click", (() => display()));
     let date = new Date();
     if (!localStorage["updateDate"]) {
         localStorage["updateDate"] = JSON.stringify(date);
@@ -1077,4 +1184,5 @@ function main() {
     }
 }
 
+console.log(getRegressionYEnds([46, 48, 51, 52.1, 54, 52, 59, 58.7, 61.6, 64, 61.4, 54.6, 58.8, 58], [132, 129, 120, 113.2, 105, 92, 84, 83.2, 88.4, 59, 80, 81.5, 71, 69.2]));
 main();

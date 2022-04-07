@@ -125,8 +125,8 @@ h4 {
     column-gap: 5%;
 }
 #value_by_time_mean_description {
-    color: #10ED70;
+    color: #108DED;
 }
 #value_by_time_std_dev_description {
-    color: #7010ED;
+    color: #DF10ED;
 }
