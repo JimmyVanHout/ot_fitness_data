@@ -29,6 +29,8 @@
             <li><a href="#modern-browsers">Modern Browsers</a></li>
             <li><a href="#using-the-command-line">Using the Command Line</a></li>
             <li><a href="#using-a-run-script">Using a Run Script</a></li>
+            <li><a href="#fixing-problems">Fixing Problems</a></li>
+            <li><a href="#uninstalling-the-program">Uninstalling the Program</a></li>
         </ul>
         <h2 id="modern-browsers">Modern Browsers</h2>
         <p>
@@ -103,6 +105,53 @@
             <li>Make the file <a href="https://help.ubuntu.com/community/NautilusScriptsHowto" target="_blank">executable</a>.</li>
             <li>Choose to either just once or always <a href="https://help.ubuntu.com/stable/ubuntu-help/files-open.html.en" target="_blank">open this type of file</a> with the <code>Terminal</code> application.</li>
         </ol>
+        <h2 id="fixing-problems">Fixing Problems</h2>
+        <p>
+            If you are experiencing problems when running the program, uploading the file, or viewing your data, try the following steps:
+        </p>
+        <ol>
+            <li>
+                <p>
+                    Refresh the <a href="data.html">Data</a> page.
+                </p>
+            </li>
+            <li>
+                <p>
+                    Ensure you have installed a <a href="#modern-browsers">modern browser</a>.
+                </p>
+            </li>
+            <li>
+                <p>
+                    Update the program to the latest version by running the following on the <a href="#using-the-command-line">command line</a>:
+                    <br>
+                    <code class="code_block">
+                        cd &ltprogram_directory&gt
+                        git pull
+                    </code>
+                    <br>
+                    where <code>&ltprogram_directory&gt</code> is the path to the program directory. For example, if you installed the program in your <b>home directory</b>, the <b>first line</b> would be:
+                    <br>
+                    <code class="code_block">
+                        cd ~/otf_data
+                    </code>
+                </p>
+            </li>
+            <li>
+                <p>
+                    Delete the configuration and data files, <code>config.txt</code> and <code>data.csv</code>, respectively, in the program directory and rerun the program.
+                </p>
+            </li>
+        </ol>
+        <h2 id="uninstalling-the-program">Uninstalling the Program</h2>
+        <p>
+            To uninstall the program, delete the program directory. For example, on the <a href="#using-the-command-line">command line</a>, run:
+            <br>
+            <code class="code_block">
+                rm &ltprogram_directory&gt
+            </code>
+            <br>
+            where <code>&ltprogram_directory&gt</code> is the path to the program directory. This example might not work on Windows.
+        </p>
         <br>
         <div id="footer">
             <p id="copyright_text">&copy 2022 <a href="https://github.com/JimmyVanHout" target="_blank">Jimmy Van Hout</a></p>
