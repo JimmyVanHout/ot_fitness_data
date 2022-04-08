@@ -398,7 +398,7 @@ function clearPreviousData(removeFiles=true) {
 }
 
 function hideAll() {
-    document.getElementById("options_selector_form").hidden = true;
+    document.getElementById("options_selector_form_container").hidden = true;
     document.getElementById("zones_averages_table").hidden = true;
     document.getElementById("zones_totals_table").hidden = true;
     document.getElementById("coaches_data_container").hidden = true;
@@ -659,7 +659,7 @@ function showValueByTime(value, heading=null, rows=null) {
         }
     }
     if (timesAndValues.length > 0) {
-        document.getElementById("options_selector_form").hidden = false;
+        document.getElementById("options_selector_form_container").hidden = false;
         let hideOutsideStdDevs = document.getElementById("hide_outside_std_devs_selector").checked;
         let showRegression = document.getElementById("regression_selector").checked;
         document.getElementById("graph_container").hidden = false;

@@ -86,14 +86,16 @@
                 <label for="period_past_month_selector">Past Week</label>
             </form>
             <br>
-            <form id="options_selector_form" hidden>
-                <input type="checkbox" id="hide_outside_std_devs_selector" name="hide_outside_std_devs_selector" value="hide_outside_std_devs">
-                <label for="hide_outside_std_devs_selector">Hide Values Outside 3 Standard Deviations</label>
+            <div id="options_selector_form_container" hidden>
+                <form id="options_selector_form">
+                    <input type="checkbox" id="hide_outside_std_devs_selector" name="hide_outside_std_devs_selector" value="hide_outside_std_devs">
+                    <label for="hide_outside_std_devs_selector">Hide Values Outside 3 Standard Deviations</label>
+                    <br>
+                    <input type="checkbox" id="regression_selector" name="regression_selector" value="regression">
+                    <label for="regression_selector" style="color: #10ED70;">Regression (Least Squares) Line</label>
+                </form>
                 <br>
-                <input type="checkbox" id="regression_selector" name="regression_selector" value="regression">
-                <label for="regression_selector" style="color: #10ED70;">Regression (Least Squares) Line</label>
-            </form>
-            <br>
+            </div>
             <h2 id="graph_description">Mean Minutes Per Zone</h2>
             <div id="no_data_message_container" hidden>
                 <p id="no_data_message">No data</p>
