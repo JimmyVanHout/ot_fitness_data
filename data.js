@@ -462,7 +462,7 @@ function getCoachesAndCounts(rows) {
 
 function showCoachesData(heading=null, rows=null) {
     hideAll();
-    document.getElementById("graph_description").innerText = "Coaches";
+    document.getElementById("graph_description").innerText = "Classes Per Coach";
     document.getElementById("graph_container").hidden = false;
     document.getElementById("coaches_data_container").hidden = false;
     document.getElementById("coaches_table_container").hidden = false;
@@ -476,7 +476,14 @@ function showCoachesData(heading=null, rows=null) {
     removeAllChildren("coaches_table_body");
     let coaches = coachesAndCounts.map(x => x[0]);
     let counts = coachesAndCounts.map(x => x[1]);
-    addIndependentVarsToTable(coaches, "coaches_table_body");
+    addIndependentVarsToTable(coaches.map((x) => {
+        let match = x.match(/(.*)? (\(.*?\))/);
+        if (match) {
+            return match[1].concat("\n", match[2]);
+        } else {
+            return x;
+        }
+    }), "coaches_table_body");
     addDependentVarsToTable(counts, "coaches_table_body");
     document.getElementById("coaches_total").innerText = rows.length;
 }
@@ -537,7 +544,7 @@ function getLocationsAndCounts(rows) {
 
 function showLocationsData(heading=null, rows=null) {
     hideAll();
-    document.getElementById("graph_description").innerText = "Locations";
+    document.getElementById("graph_description").innerText = "Classes Per Location";
     document.getElementById("graph_container").hidden = false;
     document.getElementById("locations_data_container").hidden = false;
     document.getElementById("locations_table_container").hidden = false;
@@ -670,6 +677,7 @@ function showValueByTime(value, heading=null, rows=null) {
         let values = timesAndValues.map(x => x[1]);
         let mean = null;
         let stdDev = null;
+        let regressionData = null;
         if (isTimeValue) {
             total = formatSeconds(total);
             let valuesInSeconds = values.map(x => getSeconds(x));
@@ -691,7 +699,9 @@ function showValueByTime(value, heading=null, rows=null) {
             }
             graphValues = graphValues.map(x => x / 60);
             if (showRegression) {
-                drawChart(graphTimes, graphValues, mean / 60, stdDev / 60, getRegressionYEnds(valuesInSeconds).map(x => x / 60));
+                regressionData = getRegressionData(valuesInSeconds);
+                let regressionYEnds = regressionData.slice(2);
+                drawChart(graphTimes, graphValues, mean / 60, stdDev / 60, regressionYEnds.map(x => x / 60));
             } else {
                 drawChart(graphTimes, graphValues, mean / 60, stdDev / 60);
             }
@@ -714,7 +724,9 @@ function showValueByTime(value, heading=null, rows=null) {
                 graphValues = values.slice();
             }
             if (showRegression) {
-                drawChart(graphTimes, graphValues, mean, stdDev, getRegressionYEnds(values));
+                regressionData = getRegressionData(values);
+                let regressionYEnds = regressionData.slice(2);
+                drawChart(graphTimes, graphValues, mean, stdDev, regressionYEnds);
             } else {
                 drawChart(graphTimes, graphValues, mean, stdDev);
             }
@@ -740,13 +752,19 @@ function showValueByTime(value, heading=null, rows=null) {
         }
         document.getElementById("value_by_time_mean").innerText = mean;
         document.getElementById("value_by_time_std_dev").innerText = stdDev;
+        if (showRegression) {
+            document.getElementById("value_by_time_regression").hidden = false;
+            document.getElementById("value_by_time_regression").innerHTML = `<b>Regression<b>: <i>f(x)</i> = ${regressionData[1].toFixed(2)} + ${regressionData[0].toFixed(2)}<i>x</i>`;
+        } else {
+            document.getElementById("value_by_time_regression").hidden = true;
+        }
     } else {
         document.getElementById("no_data_message_container").hidden = false;
         document.getElementById("graph_container").hidden = true;
     }
 }
 
-function getRegressionYEnds(yValues, xValues=null) {
+function getRegressionData(yValues, xValues=null) {
     let minIndexXValues = maxIndexXValues = null;
     if (!xValues) {
         xValues = new Array(yValues.length);
@@ -782,10 +800,12 @@ function getRegressionYEnds(yValues, xValues=null) {
     }
     let slope = sxy / sxx;
     let yIntercept = yMean - slope * xMean;
-    let regressionYEnds = new Array(2);
-    regressionYEnds[0] = yIntercept + xValues[minIndexXValues] * slope;
-    regressionYEnds[1] = yIntercept + xValues[maxIndexXValues] * slope;
-    return regressionYEnds;
+    let regressionData = new Array(4);
+    regressionData[0] = slope;
+    regressionData[1] = yIntercept;
+    regressionData[2] = yIntercept + xValues[minIndexXValues] * slope;
+    regressionData[3] = yIntercept + xValues[maxIndexXValues] * slope;
+    return regressionData;
 }
 
 function shouldDisplayTotal(index) {

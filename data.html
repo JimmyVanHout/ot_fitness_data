@@ -55,10 +55,10 @@
                         <label for="zones_totals_selector">Total Minutes Per Zone</label>
                         <br>
                         <input type="radio" id="coaches_selector" name="data_selector" value="coaches">
-                        <label for="coaches_selector">Coaches</label>
+                        <label for="coaches_selector">Classes Per Coach</label>
                         <br>
                         <input type="radio" id="locations_selector" name="data_selector" value="locations">
-                        <label for="locations_selector">Locations</label>
+                        <label for="locations_selector">Classes Per Location</label>
                         <br>
                     </div>
                 </div>
@@ -147,7 +147,7 @@
                     <table id="locations_table" class="data_table">
                         <thead id="locations_table_heading">
                             <tr>
-                                <td><b>Locations</b></td>
+                                <td><b>Location</b></td>
                                 <td><b>Classes</b></td>
                             </tr>
                         </thead>
@@ -172,6 +172,7 @@
                     <p id="value_by_time_total_p"><b>Total</b>: <span id="value_by_time_total"></span></p>
                     <p id="value_by_time_mean_description"><b>Mean</b>: <span id="value_by_time_mean"></span></p>
                     <p id="value_by_time_std_dev_description"><b>Std Dev</b>: <span id="value_by_time_std_dev"></span></p>
+                    <p id="value_by_time_regression"></p>
                 </div>
             </div>
             <br>
