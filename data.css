@@ -3,24 +3,8 @@ body {
     max-width: 820px;
     min-width: 800px;
     margin: auto;
-    background-color: #FFFFFF;
-    color: #000000;
-}
-@media (prefers-color-scheme: dark) {
-    body {
-        width: 50%;
-        max-width: 820px;
-        min-width: 800px;
-        margin: auto;
-        background-color: #121212;
-        color: #FFFFFF;
-    }
-    a:link {
-        color: #9E9EFF;
-    }
-    a:visited {
-        color: #D0ADF0;
-    }
+    background-color: white;
+    color: black;
 }
 h1 {
     text-align: center;
@@ -167,4 +151,31 @@ h4 {
 }
 #options_selector_form {
     line-height: 1.5;
+}
+@media (prefers-color-scheme: dark) {
+    body {
+        width: 50%;
+        max-width: 820px;
+        min-width: 800px;
+        margin: auto;
+        background-color: #121212;
+        color: white;
+    }
+    a:link {
+        color: #9E9EFF;
+    }
+    a:visited {
+        color: #D0ADF0;
+    }
+    .all_data_table_cell {
+        border: 1px solid white;
+    }
+    .graph_selector_form_column {
+        border: 1px solid white;
+        max-height: 140px;
+        overflow: auto;
+    }
+    #all_data_table {
+        border: 1px solid white;
+    }
 }
