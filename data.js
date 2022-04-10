@@ -74,13 +74,18 @@ function showZonesAveragesData(heading=null, rows=null) {
         heading = JSON.parse(localStorage["heading"]);
         rows = JSON.parse(localStorage["rows"]);
     }
-    let zonesAverages = getZonesAverages(rows);
-    let zonesStdDevs = getZonesStdDevs(rows, zonesAverages);
-    drawZonesBarChart(zonesAverages);
-    removeAllChildren("zones_averages_table_body");
-    addZonesLabelsToTable("zones_averages_table_body");
-    addZonesValuesToTable(zonesAverages, "zones_averages_table_body");
-    addZonesValuesToTable(zonesStdDevs, "zones_averages_table_body");
+    if (rows.length > 0) {
+        let zonesAverages = getZonesAverages(rows);
+        let zonesStdDevs = getZonesStdDevs(rows, zonesAverages);
+        drawZonesBarChart(zonesAverages);
+        removeAllChildren("zones_averages_table_body");
+        addZonesLabelsToTable("zones_averages_table_body");
+        addZonesValuesToTable(zonesAverages, "zones_averages_table_body");
+        addZonesValuesToTable(zonesStdDevs, "zones_averages_table_body");
+    } else {
+        document.getElementById("no_data_message_container").hidden = false;
+        document.getElementById("graph_container").hidden = true;
+    }
 }
 
 function drawZonesBarChart(zonesValues) {
@@ -471,21 +476,26 @@ function showCoachesData(heading=null, rows=null) {
         heading = JSON.parse(localStorage["heading"]);
         rows = JSON.parse(localStorage["rows"]);
     }
-    let coachesAndCounts = getCoachesAndCounts(rows);
-    drawCoachesBarChart(coachesAndCounts);
-    removeAllChildren("coaches_table_body");
-    let coaches = coachesAndCounts.map(x => x[0]);
-    let counts = coachesAndCounts.map(x => x[1]);
-    addIndependentVarsToTable(coaches.map((x) => {
-        let match = x.match(/(.*)? (\(.*?\))/);
-        if (match) {
-            return match[1].concat("\n", match[2]);
-        } else {
-            return x;
-        }
-    }), "coaches_table_body");
-    addDependentVarsToTable(counts, "coaches_table_body");
-    document.getElementById("coaches_total").innerText = rows.length;
+    if (rows.length > 0) {
+        let coachesAndCounts = getCoachesAndCounts(rows);
+        drawCoachesBarChart(coachesAndCounts);
+        removeAllChildren("coaches_table_body");
+        let coaches = coachesAndCounts.map(x => x[0]);
+        let counts = coachesAndCounts.map(x => x[1]);
+        addIndependentVarsToTable(coaches.map((x) => {
+            let match = x.match(/(.*)? (\(.*?\))/);
+            if (match) {
+                return match[1].concat("\n", match[2]);
+            } else {
+                return x;
+            }
+        }), "coaches_table_body");
+        addDependentVarsToTable(counts, "coaches_table_body");
+        document.getElementById("coaches_total").innerText = rows.length;
+    } else {
+        document.getElementById("no_data_message_container").hidden = false;
+        document.getElementById("graph_container").hidden = true;
+    }
 }
 
 function drawCoachesBarChart(coachesAndCounts) {
@@ -553,14 +563,19 @@ function showLocationsData(heading=null, rows=null) {
         heading = JSON.parse(localStorage["heading"]);
         rows = JSON.parse(localStorage["rows"]);
     }
-    let locationsAndCounts = getLocationsAndCounts(rows);
-    drawLocationsBarChart(locationsAndCounts);
-    removeAllChildren("locations_table_body");
-    let locations = locationsAndCounts.map(x => x[0]);
-    let counts = locationsAndCounts.map(x => x[1]);
-    addIndependentVarsToTable(locations, "locations_table_body");
-    addDependentVarsToTable(counts, "locations_table_body");
-    document.getElementById("locations_total").innerText = rows.length;
+    if (rows.length > 0) {
+        let locationsAndCounts = getLocationsAndCounts(rows);
+        drawLocationsBarChart(locationsAndCounts);
+        removeAllChildren("locations_table_body");
+        let locations = locationsAndCounts.map(x => x[0]);
+        let counts = locationsAndCounts.map(x => x[1]);
+        addIndependentVarsToTable(locations, "locations_table_body");
+        addDependentVarsToTable(counts, "locations_table_body");
+        document.getElementById("locations_total").innerText = rows.length;
+    } else {
+        document.getElementById("no_data_message_container").hidden = false;
+        document.getElementById("graph_container").hidden = true;
+    }
 }
 
 function drawLocationsBarChart(locationsAndCounts) {
@@ -601,11 +616,16 @@ function showZonesTotalsData(heading=null, rows=null) {
         heading = JSON.parse(localStorage["heading"]);
         rows = JSON.parse(localStorage["rows"]);
     }
-    let zonesTotals = getZonesTotals(rows);
-    drawZonesBarChart(zonesTotals);
-    removeAllChildren("zones_totals_table_body");
-    addZonesLabelsToTable("zones_totals_table_body");
-    addZonesValuesToTable(zonesTotals.map(x => formatSeconds(x * 60)), "zones_totals_table_body");
+    if (rows.length > 0) {
+        let zonesTotals = getZonesTotals(rows);
+        drawZonesBarChart(zonesTotals);
+        removeAllChildren("zones_totals_table_body");
+        addZonesLabelsToTable("zones_totals_table_body");
+        addZonesValuesToTable(zonesTotals.map(x => formatSeconds(x * 60)), "zones_totals_table_body");
+    } else {
+        document.getElementById("no_data_message_container").hidden = false;
+        document.getElementById("graph_container").hidden = true;
+    }
 }
 
 function getSeconds(time) {
@@ -698,7 +718,7 @@ function showValueByTime(value, heading=null, rows=null) {
                 graphValues = valuesInSeconds.slice();
             }
             graphValues = graphValues.map(x => x / 60);
-            if (showRegression) {
+            if (showRegression && valuesInSeconds.length > 1) {
                 regressionData = getRegressionData(valuesInSeconds);
                 let regressionYEnds = regressionData.slice(2);
                 drawChart(graphTimes, graphValues, mean / 60, stdDev / 60, regressionYEnds.map(x => x / 60));
@@ -723,7 +743,7 @@ function showValueByTime(value, heading=null, rows=null) {
                 graphTimes = times.slice();
                 graphValues = values.slice();
             }
-            if (showRegression) {
+            if (showRegression && values.length > 1) {
                 regressionData = getRegressionData(values);
                 let regressionYEnds = regressionData.slice(2);
                 drawChart(graphTimes, graphValues, mean, stdDev, regressionYEnds);
@@ -752,7 +772,7 @@ function showValueByTime(value, heading=null, rows=null) {
         }
         document.getElementById("value_by_time_mean").innerText = mean;
         document.getElementById("value_by_time_std_dev").innerText = stdDev;
-        if (showRegression) {
+        if (showRegression && values.length > 1) {
             document.getElementById("value_by_time_regression").hidden = false;
             document.getElementById("value_by_time_regression").innerHTML = `<b>Regression<b>: <i>f(x)</i> = ${regressionData[1].toFixed(2)} + ${regressionData[0].toFixed(2)}<i>x</i>`;
         } else {
