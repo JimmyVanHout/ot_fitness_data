@@ -1131,66 +1131,50 @@ function display() {
             break;
         }
     }
-    let updateDate = new Date(JSON.parse(localStorage["updateDate"]));
     let currentDate = new Date();
     let rows = JSON.parse(localStorage["rows"]);
     if (periodSelector.value == "past_year") {
-        if (compareDates(updateDate, currentDate) != 0 || !localStorage["rows_past_year"]) {
-            let date = getOneYearAgo(currentDate);
-            rows = rows.filter((row) => {
-                let rowDateMatch = row[1].match(/(\d{1,2})\/(\d{1,2})\/(\d{4})/);
-                let year = parseInt(rowDateMatch[3]);
-                let month = parseInt(rowDateMatch[1]) - 1;
-                let day = parseInt(rowDateMatch[2]);
-                let rowDate = new Date();
-                rowDate.setFullYear(year);
-                rowDate.setMonth(month);
-                rowDate.setDate(day);
-                let dateComparison = compareDates(rowDate, date);
-                return dateComparison == 0 || dateComparison == 1;
-            });
-            localStorage["rows_past_year"] = JSON.stringify(rows);
-        } else {
-            rows = JSON.parse(localStorage["rows_past_year"]);
-        }
+        let date = getOneYearAgo(currentDate);
+        rows = rows.filter((row) => {
+            let rowDateMatch = row[1].match(/(\d{1,2})\/(\d{1,2})\/(\d{4})/);
+            let year = parseInt(rowDateMatch[3]);
+            let month = parseInt(rowDateMatch[1]) - 1;
+            let day = parseInt(rowDateMatch[2]);
+            let rowDate = new Date();
+            rowDate.setFullYear(year);
+            rowDate.setMonth(month);
+            rowDate.setDate(day);
+            let dateComparison = compareDates(rowDate, date);
+            return dateComparison == 0 || dateComparison == 1;
+        });
     } else if (periodSelector.value == "past_month") {
-        if (compareDates(updateDate, currentDate) != 0 || !localStorage["rows_past_month"]) {
-            let date = getOneMonthAgo(currentDate);
-            rows = rows.filter((row) => {
-                let rowDateMatch = row[1].match(/(\d{1,2})\/(\d{1,2})\/(\d{4})/);
-                let year = parseInt(rowDateMatch[3]);
-                let month = parseInt(rowDateMatch[1]) - 1;
-                let day = parseInt(rowDateMatch[2]);
-                let rowDate = new Date();
-                rowDate.setFullYear(year);
-                rowDate.setMonth(month);
-                rowDate.setDate(day);
-                let dateComparison = compareDates(rowDate, date);
-                return dateComparison == 0 || dateComparison == 1;
-            });
-            localStorage["rows_past_month"] = JSON.stringify(rows);
-        } else {
-            rows = JSON.parse(localStorage["rows_past_month"]);
-        }
+        let date = getOneMonthAgo(currentDate);
+        rows = rows.filter((row) => {
+            let rowDateMatch = row[1].match(/(\d{1,2})\/(\d{1,2})\/(\d{4})/);
+            let year = parseInt(rowDateMatch[3]);
+            let month = parseInt(rowDateMatch[1]) - 1;
+            let day = parseInt(rowDateMatch[2]);
+            let rowDate = new Date();
+            rowDate.setFullYear(year);
+            rowDate.setMonth(month);
+            rowDate.setDate(day);
+            let dateComparison = compareDates(rowDate, date);
+            return dateComparison == 0 || dateComparison == 1;
+        });
     } else if (periodSelector.value == "past_week") {
-        if (compareDates(updateDate, currentDate) != 0 || !localStorage["rows_past_week"]) {
-            let date = getOneWeekAgo(currentDate);
-            rows = rows.filter((row) => {
-                let rowDateMatch = row[1].match(/(\d{1,2})\/(\d{1,2})\/(\d{4})/);
-                let year = parseInt(rowDateMatch[3]);
-                let month = parseInt(rowDateMatch[1]) - 1;
-                let day = parseInt(rowDateMatch[2]);
-                let rowDate = new Date();
-                rowDate.setFullYear(year);
-                rowDate.setMonth(month);
-                rowDate.setDate(day);
-                let dateComparison = compareDates(rowDate, date);
-                return dateComparison == 0 || dateComparison == 1;
-            });
-            localStorage["rows_past_week"] = JSON.stringify(rows);
-        } else {
-            rows = JSON.parse(localStorage["rows_past_week"]);
-        }
+        let date = getOneWeekAgo(currentDate);
+        rows = rows.filter((row) => {
+            let rowDateMatch = row[1].match(/(\d{1,2})\/(\d{1,2})\/(\d{4})/);
+            let year = parseInt(rowDateMatch[3]);
+            let month = parseInt(rowDateMatch[1]) - 1;
+            let day = parseInt(rowDateMatch[2]);
+            let rowDate = new Date();
+            rowDate.setFullYear(year);
+            rowDate.setMonth(month);
+            rowDate.setDate(day);
+            let dateComparison = compareDates(rowDate, date);
+            return dateComparison == 0 || dateComparison == 1;
+        });
     }
     let dataSelector = null;
     let graphSelectorForm = document.getElementById("graph_selector_form");
