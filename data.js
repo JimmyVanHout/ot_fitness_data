@@ -61,7 +61,7 @@ function getMean(lst, sum=null) {
 
 function getStdDev(lst, mean=null) {
     mean = mean ?? getMean(lst);
-    let stdDev = Math.sqrt(lst.reduce(((acc, x) => acc + Math.pow(x - mean, 2))) / lst.length);
+    let stdDev = Math.sqrt(lst.reduce(((acc, x) => acc + Math.pow(x - mean, 2)), 0) / lst.length);
     return stdDev;
 }
 
