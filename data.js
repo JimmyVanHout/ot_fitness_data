@@ -310,7 +310,7 @@ async function getNewData() {
 }
 
 function getUnits() {
-    let unitsAndIndices = [[null, [0, 1, 2, 3, 9, 10, 13, 15, 18, 19, 20, 21, 24, 29, 30]], ["min", [4, 5, 6, 7, 8]], ["bpm", [11, 12]], ["mi", [14, 23]], ["mph", [16, 17, 27, 28]], ["ft", [22]], ["W", [25, 26]], ["strokes/min", [31]]];
+    let unitsAndIndices = [[null, [0, 1, 2, 3, 9, 10, 13, 15, 18, 19, 20, 21, 24, 29, 30]], ["min", [4, 5, 6, 7, 8]], ["bpm", [11, 12]], ["mi", [14]], ["m", [23]], ["mph", [16, 17, 27, 28]], ["ft", [22]], ["W", [25, 26]], ["strokes/min", [31]]];
     let units = Array(32);
     for (element of unitsAndIndices) {
         let unit = element[0];
