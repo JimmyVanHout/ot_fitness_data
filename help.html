@@ -138,6 +138,34 @@
         <ol>
             <li>
                 <p>
+                    If you are getting an <code>Invalid data in file.</code> error, do the following:
+                </p>
+                <ul class="list_with_space">
+                    <li>
+                        <p>
+                            Make sure that each row in the uploaded data file has at least the first 9 entries, which are all <b>required</b>:
+                        </p>
+                        <ol class="list_with_space">
+                            <li><code>location</code></li>
+                            <li><code>date</code></li>
+                            <li><code>start_time</code></li>
+                            <li><code>coach</code></li>
+                            <li><code>grey_zone</code></li>
+                            <li><code>blue_zone</code></li>
+                            <li><code>green_zone</code></li>
+                            <li><code>orange_zone</code></li>
+                            <li><code>red_zone</code></li>
+                        </ol>
+                    </li>
+                    <li>
+                        <p>
+                            Make sure that no columns have data of the incorrect type (for example, the <code>treadmill_distance</code> column should not hold any values formatted as times). If you created the data file by running the data extracting program, this shouldn't occur.
+                        </p>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <p>
                     Refresh the <a href="data.html">Data</a> page.
                 </p>
             </li>

@@ -222,7 +222,10 @@ function validate(heading, rows) {
         return false;
     }
     for (let i = 0; i < rows.length; i++) {
-        for (let j = 0; j < 8; j++) {
+        if (rows[i].length < 9) {
+            return false;
+        }
+        for (let j = 0; j < 9; j++) {
             if (rows[i][j].length == 0) {
                 return false;
             }
