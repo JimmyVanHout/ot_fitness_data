@@ -166,6 +166,25 @@
             </li>
             <li>
                 <p>
+                    If you are using a <b>Mac</b>, make sure that you have the required SSL certificates installed by navigating from your home directory to <code>Applications/Python &ltversion&gt</code> and double clicking the file <code>Install Certificates.command</code> (<code>&ltversion&gt</code> is the version of your Python installation). If you do not see a directory named <code>Python &ltversion&gt</code> in your <code>Applications</code> directory, make sure you have installed the <a href="https://www.python.org/downloads/" target="_blank">latest version of Python</a>, then try again.
+                </p>
+                <p>
+                    The official Python documentation states (in <code>Applications/Python &ltversion&gt/ReadMe.rtf</code>):
+                </p>
+                <blockquote>
+                    <p>
+                        Certificate verification and OpenSSL
+                    </p>
+                    <p>
+                        This package includes its own private copy of OpenSSL 1.1.1. The trust certificates in system and user keychains managed by the Keychain Access application and the security command line utility are not used as defaults by the Python ssl module. A sample command script is included in /Applications/Python 3.10 to install a curated bundle of default root certificates from the third-party certifi package (<a href="https://pypi.org/project/certifi/" target="_blank">https://pypi.org/project/certifi/</a>). Double-click on Install Certificates to run it.
+                    </p>
+                    <p>
+                        The bundled pip has its own default certificate store for verifying download connections.
+                    </p>
+                </blockquote>
+            </li>
+            <li>
+                <p>
                     Refresh the <a href="data.html">Data</a> page.
                 </p>
             </li>
