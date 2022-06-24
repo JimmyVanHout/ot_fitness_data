@@ -166,10 +166,13 @@
             </li>
             <li>
                 <p>
-                    If you are using a <b>Mac</b>, make sure that you have the required SSL certificates installed by navigating to <code>/Applications/Python &ltversion&gt</code> and double clicking the file <code>Install Certificates.command</code> (<code>&ltversion&gt</code> is the version of your Python installation). If you do not see a directory named <code>Python &ltversion&gt</code> in the <code>/Applications</code> directory, make sure you have installed the <a href="https://www.python.org/downloads/" target="_blank">latest version of Python</a>, then try again.
+                    If you are using a <b>Mac</b>, make sure that you have the required SSL certificates installed by navigating to <code>/Applications/Python &ltversion&gt</code> and double clicking the file <code>Install Certificates.command</code> (<code>&ltversion&gt</code> is the version of your Python installation).
+                </p>
+                <p>
+                    If you do not see a directory named <code>Python &ltversion&gt</code> in the <code>/Applications</code> directory, follow all the steps described in the section <a href="https://www.otfitnessdata.com/getting_started#install-the-program-and-dependencies">Install the Program and Dependencies</a> on the Getting Started page, <i>not including</i> reinstalling the program itself (which would be unnecessary) but <i>including</i> installing Python and the required <code>flask</code> and <code>bs4</code> libraries after the Python installation has finished. Even if you are <i>reinstalling</i> Python and have already installed these libraries during the inital setup of the program, they <i>must</i> be installed again after the new Python installation has completed as they will no longer be present after a fresh install of Python.
                 </p>
                 <blockquote>
-                    <b>Note:</b> Make sure you navigate to the <code>Applications</code> directory in the <b>root directory</b> (<code>/Applications</code>), <i>not</i> the <code>Applications</code> directory in your home directory (<code>/Users/&ltusername&gt/Applications</code>, where <code>&ltusername&gt</code> is your username). They are two <b>different</b> directories, and the Python installation directory will be in the former.
+                    <b>Note:</b> Make sure you navigate to the <code>Applications</code> directory in the <b>root directory</b> (<code>/Applications</code>), <i>not</i> the <code>Applications</code> directory in your home directory (<code>/Users/&ltusername&gt/Applications</code>, where <code>&ltusername&gt</code> is your username). They are two <b>different</b> directories, and the Python installation directory will be in the former. The correct <code>Applications</code> directory should be <b>visible in your Finder sidebar</b>.
                 </blockquote>
                 <p>
                     The official Python documentation states (in <code>Applications/Python &ltversion&gt/ReadMe.rtf</code>):
