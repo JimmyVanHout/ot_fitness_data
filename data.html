@@ -1,0 +1,203 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>OT Fitness Data | Data</title>
+        <link rel="stylesheet" href="data.css">
+    </head>
+    <body>
+        <div id="title_container">
+            <span id="title"><span style="color: #ED7010;">OT Fitness</span> <span style="color: #108DED">Data</span></span>
+        </div>
+        <div id="nav_bar">
+            <div class="nav_bar_element">
+                <a href="index.html" class="nav_bar_link">Home</a>
+            </div>
+            <div class="nav_bar_element">
+                <a href="getting_started.html" class="nav_bar_link">Getting Started</a>
+            </div>
+            <div class="nav_bar_element">
+                <a href="data.html" class="nav_bar_link">Data</a>
+            </div>
+            <div class="nav_bar_element">
+                <a href="help.html" class="nav_bar_link">Help</a>
+            </div>
+        </div>
+        <br>
+        <h1>Data</h1>
+        <p>
+            After successfully running the data-extracting program as described in <a href="getting_started.html">Getting Started</a>, <b>upload</b> the resulting <code>data.csv</code> file here:
+        </p>
+        <form id="file_upload_form" name="file_upload_form">
+            <input id="file_input" type="file" name="data_file">
+        </form>
+        <p>
+            If you have previously uploaded a file, it will be saved in your browser and the analysis will be displayed automatically whenever you visit this page. If you would like to clear that data, click here:
+        </p>
+        <form id="clear_previous_data_form" name="clear_previous_data_form">
+            <button id="clear_previous_data_button" type="button">Clear</button>
+        </form>
+        <div id="error_message_container" hidden>
+            <p id="error_message">
+                Invalid data in file.
+            </p>
+        </div>
+        <div id="analysis_container" hidden>
+            <br>
+            <form id="graph_selector_form">
+                <div id="graph_selector_main_container">
+                    <p class="graph_selectors_title">Main Stats:</p>
+                    <div id="graph_selector_form_main" class="graph_selector_form_column">
+                        <input type="radio" id="zones_averages_selector" name="data_selector" value="zones_averages" checked>
+                        <label for="zones_averages_selector">Mean Minutes Per Zone</label>
+                        <br>
+                        <input type="radio" id="zones_totals_selector" name="data_selector" value="zones_totals">
+                        <label for="zones_totals_selector">Total Minutes Per Zone</label>
+                        <br>
+                        <input type="radio" id="coaches_selector" name="data_selector" value="coaches">
+                        <label for="coaches_selector">Classes Per Coach</label>
+                        <br>
+                        <input type="radio" id="locations_selector" name="data_selector" value="locations">
+                        <label for="locations_selector">Classes Per Location</label>
+                        <br>
+                    </div>
+                </div>
+                <div id="graph_selector_form_treadmill_container">
+                    <p class="graph_selectors_title">Treadmill:</p>
+                    <div id="graph_selector_form_treadmill" class="graph_selector_form_column">
+                    </div>
+                </div>
+                <div id="graph_selector_form_rower_container">
+                    <p class="graph_selectors_title">Rower:</p>
+                    <div id="graph_selector_form_rower" class="graph_selector_form_column">
+                    </div>
+                </div>
+            </form>
+            <br>
+            <form id="period_selector_form">
+                <span class="graph_selectors_title">Period: </span>
+                <input type="radio" id="period_all_time_selector" name="period_selector" value="all_time" checked>
+                <label for="period_all_time_selector">All Time</label>
+                <input type="radio" id="period_past_year_selector" name="period_selector" value="past_year">
+                <label for="period_past_year_selector">Past Year</label>
+                <input type="radio" id="period_past_month_selector" name="period_selector" value="past_month">
+                <label for="period_past_month_selector">Past Month</label>
+                <input type="radio" id="period_past_week_selector" name="period_selector" value="past_week">
+                <label for="period_past_week_selector">Past Week</label>
+                <input type="radio" id="period_past_day_selector" name="period_selector" value="past_day">
+                <label for="period_past_day_selector">Past Day</label>
+                <input type="radio" id="period_last_workout_selector" name="period_selector" value="last_workout">
+                <label for="period_last_workout_selector">Last Workout</label>
+            </form>
+            <br>
+            <div id="options_selector_form_container" hidden>
+                <form id="options_selector_form">
+                    <input type="checkbox" id="hide_outside_std_devs_selector" name="hide_outside_std_devs_selector" value="hide_outside_std_devs">
+                    <label for="hide_outside_std_devs_selector">Hide Values Outside 3 Standard Deviations</label>
+                    <br>
+                    <input type="checkbox" id="regression_selector" name="regression_selector" value="regression">
+                    <label for="regression_selector" style="color: #10ED70;">Regression (Least Squares) Line</label>
+                </form>
+                <br>
+            </div>
+            <h2 id="graph_description">Mean Minutes Per Zone</h2>
+            <div id="no_data_message_container" hidden>
+                <p id="no_data_message">No data</p>
+            </div>
+            <div id="graph_container">
+                <canvas id="graph"></canvas>
+            </div>
+            <br>
+            <table id="zones_averages_table" hidden>
+                <thead>
+                    <tr>
+                        <td><b>Zone</b></td>
+                        <td><b>Mean (min)</b></td>
+                        <td><b>Std Dev (min)</b></td>
+                    </tr>
+                </thead>
+                <tbody id="zones_averages_table_body">
+                </tbody>
+            </table>
+            <table id="zones_totals_table" hidden>
+                <thead>
+                    <tr>
+                        <td><b>Zone</b></td>
+                        <td><b>Total</b></td>
+                    </tr>
+                </thead>
+                <tbody id="zones_totals_table_body">
+                </tbody>
+            </table>
+            <div id="coaches_data_container" class="data_container" hidden>
+                <div id="coaches_table_container" class="table_container">
+                    <table id="coaches_table" class="data_table">
+                        <thead id="coaches_table_heading">
+                            <tr>
+                                <td><b>Coach</b></td>
+                                <td><b>Classes</b></td>
+                            </tr>
+                        </thead>
+                        <tbody id="coaches_table_body">
+                        </tbody>
+                    </table>
+                </div>
+                <div id="coaches_stats_container" class="stats_container">
+                    <p><b>Total</b>: <span id="coaches_total"></span></p>
+                </div>
+            </div>
+            <div id="locations_data_container" class="data_container" hidden>
+                <div id="locations_table_container" class="table_container">
+                    <table id="locations_table" class="data_table">
+                        <thead id="locations_table_heading">
+                            <tr>
+                                <td><b>Location</b></td>
+                                <td><b>Classes</b></td>
+                            </tr>
+                        </thead>
+                        <tbody id="locations_table_body">
+                        </tbody>
+                    </table>
+                </div>
+                <div id="locations_stats_container" class="stats_container">
+                    <p><b>Total</b>: <span id="locations_total"></span></p>
+                </div>
+            </div>
+            <div id="value_by_time_data_container" class="data_container" hidden>
+                <div id="value_by_time_table_container" class="table_container">
+                    <table id="value_by_time_table" class="data_table">
+                        <thead id="value_by_time_table_heading">
+                        </thead>
+                        <tbody id="value_by_time_table_body">
+                        </tbody>
+                    </table>
+                </div>
+                <div id="value_by_time_stats_container" class="stats_container">
+                    <p id="value_by_time_total_p"><b>Total</b>: <span id="value_by_time_total"></span></p>
+                    <p id="value_by_time_mean_description"><b>Mean</b>: <span id="value_by_time_mean"></span></p>
+                    <p id="value_by_time_std_dev_description"><b>Std Dev</b>: <span id="value_by_time_std_dev"></span></p>
+                    <p id="value_by_time_regression"></p>
+                </div>
+            </div>
+            <br>
+            <h2 id="all_data_description">Data</h2>
+            <div id="all_data_table_container" hidden>
+                <table id="all_data_table">
+                    <thead id="all_data_table_heading">
+                    </thead>
+                    <tbody id="all_data_table_body">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <br>
+        <br>
+        <div id="footer">
+            <p id="copyright_text">&copy 2022 <a href="https://github.com/JimmyVanHout" target="_blank">Jimmy Van Hout</a></p>
+            <p>Other sites: <a href="https://www.simpleweather.net" target="_blank">SimpleWeather.net</a> - Detailed weather forecast</p>
+        </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/1.4.0/chartjs-plugin-annotation.min.js"></script>
+        <script src="data.js"></script>
+    </body>
+</html>

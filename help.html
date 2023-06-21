@@ -1,0 +1,239 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>OT Fitness Data | Help</title>
+        <link rel="stylesheet" href="help.css">
+    </head>
+    <body>
+        <div id="title_container">
+            <span id="title"><span style="color: #ED7010;">OT Fitness</span> <span style="color: #108DED">Data</span></span>
+        </div>
+        <div id="nav_bar">
+            <div class="nav_bar_element">
+                <a href="index.html" class="nav_bar_link">Home</a>
+            </div>
+            <div class="nav_bar_element">
+                <a href="getting_started.html" class="nav_bar_link">Getting Started</a>
+            </div>
+            <div class="nav_bar_element">
+                <a href="data.html" class="nav_bar_link">Data</a>
+            </div>
+            <div class="nav_bar_element">
+                <a href="help.html" class="nav_bar_link">Help</a>
+            </div>
+        </div>
+        <br>
+        <h1>Help</h1>
+        <ul id="contents" class="list_with_space">
+            <li><a href="#modern-browsers">Modern Browsers</a></li>
+            <li><a href="#using-the-command-line">Using the Command Line</a></li>
+            <li><a href="#using-a-run-script">Using a Run Script</a></li>
+            <li><a href="#fixing-problems">Fixing Problems</a></li>
+            <li><a href="#reporting-issues">Reporting Issues</a></li>
+            <li><a href="#uninstalling-the-program">Uninstalling the Program</a></li>
+        </ul>
+        <h2 id="modern-browsers">Modern Browsers</h2>
+        <p>
+            If you are having trouble, make sure that you are using the latest version of a modern web browser, such as:
+        </p>
+        <ul class="list_with_space">
+            <li>
+                <a href="https://www.google.com/chrome/downloads/" target="_blank">Google Chrome</a>
+            </li>
+            <li>
+                <a href="https://www.mozilla.org/en-US/firefox/new/" target="_blank">Mozilla Firefox</a>
+            </li>
+            <li>
+                <a href="https://www.apple.com/safari/" target="_blank">Safari</a>
+            </li>
+            <li>
+                <a href="https://www.microsoft.com/en-us/edge" target="_blank">Microsoft Edge</a>
+            </li>
+        </ul>
+        <h2 id="using-the-command-line">Using the Command Line</h2>
+        <p>
+            If you need any help using the command line, see the operating-system-dependent guides listed below:
+        </p>
+        <ul class="list_with_space">
+            <li>
+                <a href="https://support.apple.com/guide/terminal/execute-commands-and-run-tools-apdb66b5242-0d18-49fc-9c47-a2498b7c91d5/mac" target="_blank">Mac command line</a>
+            </li>
+            <li>
+                <a href="https://ubuntu.com/tutorials/command-line-for-beginners#1-overview" target="_blank">Ubuntu command line</a>
+            </li>
+            <li>
+                <a href="https://docs.microsoft.com/en-us/powershell/scripting/overview?view=powershell-7.2" target="_blank">Windows PowerShell command line</a>
+            </li>
+        </ul>
+        <h2 id="using-a-run-script">Using a Run Script</h2>
+        <p>
+            <b>Example video:</b> Watch <a href="https://www.youtube.com/watch?v=ulI7SdcKOCc&t=401s" target="_blank">this part of the example video</a> demonstrating how to setup a run script following the steps below.
+        </p>
+        <p>
+            If you need help with this section, see:
+        </p>
+        <ul class="list_with_space">
+            <li>
+                <a href="https://support.apple.com/guide/terminal/execute-commands-and-run-tools-apdb66b5242-0d18-49fc-9c47-a2498b7c91d5/mac" target="_blank">Mac command line</a>
+            </li>
+            <li>
+                <a href="https://ubuntu.com/tutorials/command-line-for-beginners#1-overview" target="_blank">Ubuntu command line</a>
+            </li>
+        </ul>
+        <p>
+            Once you have already run the program for the first time, you can create a run script to make future runs as simple as double clicking a file on your desktop. The example demonstrated below is for <b>Mac or Linux</b> operating systems.
+        </p>
+        <p>
+            The instructions below assume that you have installed the program directory in your <b>home directory</b> (that is, the path to the program directory is <code>~/otf_data</code>). Then <b>create a file</b> named <code>run_otf_data.sh</code> with the following contents:
+            <br>
+            <code class="code_block">
+                #!/bin/bash
+
+                cd ~/otf_data
+                python3 otf_data.py
+            </code>
+            <br>
+            You can save this file wherever you like. Then proceed by following the instructions specific to your operating system below.
+        </p>
+        <h3 id="using-a-run-script-on-mac">Using a Run Script on Mac</h3>
+        <ol class="list_with_space">
+            <li>
+                <p>
+                    Make the file <a href="https://support.apple.com/guide/terminal/make-a-file-executable-apdd100908f-06b3-4e63-8a87-32e71241bab4/mac" target="_blank">executable</a>.
+                </p>
+            </li>
+            <li>
+                <p>
+                    Choose to either just once or always <a href="https://support.apple.com/guide/mac-help/choose-an-app-to-open-a-file-on-mac-mh35597/mac" target="_blank">open this type of file</a> with the <code>Terminal</code> application.
+                </p>
+            </li>
+            <li>
+                <p>
+                    Double click the file to run it.
+                </p>
+            </li>
+        </ol>
+        <h3 id="using-a-run-script-on-ubuntu">Using a Run Script on Ubuntu</h3>
+        <ol class="list_with_space">
+            <li>
+                <p>
+                    Make the file <a href="https://help.ubuntu.com/community/NautilusScriptsHowto" target="_blank">executable</a>.
+                </p>
+            </li>
+            <li>
+                <p>
+                    Choose to either just once or always <a href="https://help.ubuntu.com/stable/ubuntu-help/files-open.html.en" target="_blank">open this type of file</a> with the <code>Terminal</code> application.
+                </p>
+            </li>
+            <li>
+                <p>
+                    Double click the file to run it.
+                </p>
+            </li>
+        </ol>
+        <h2 id="fixing-problems">Fixing Problems</h2>
+        <p>
+            If you are experiencing problems when running the program, uploading the file, or viewing your data, try the following steps:
+        </p>
+        <ol>
+            <li>
+                <p>
+                    If you are getting an <code>Invalid data in file.</code> error, do the following:
+                </p>
+                <ul class="list_with_space">
+                    <li>
+                        <p>
+                            Make sure that each row in the uploaded data file has at least the first 9 entries, which are all <b>required</b>:
+                        </p>
+                        <ol class="list_with_space">
+                            <li><code>location</code></li>
+                            <li><code>date</code></li>
+                            <li><code>start_time</code></li>
+                            <li><code>coach</code></li>
+                            <li><code>grey_zone</code></li>
+                            <li><code>blue_zone</code></li>
+                            <li><code>green_zone</code></li>
+                            <li><code>orange_zone</code></li>
+                            <li><code>red_zone</code></li>
+                        </ol>
+                    </li>
+                    <li>
+                        <p>
+                            Make sure that no columns have data of the incorrect type (for example, the <code>treadmill_distance</code> column should not hold any values formatted as times). If you created the data file by running the data extracting program, this shouldn't occur.
+                        </p>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <p>
+                    If you are using a <b>Mac</b>, make sure that you have the required SSL certificates installed by navigating to <code>/Applications/Python &ltversion&gt</code> and double clicking the file <code>Install Certificates.command</code> (<code>&ltversion&gt</code> is the version of your Python installation).
+                </p>
+                <p>
+                    If you do not see a directory named <code>Python &ltversion&gt</code> in the <code>/Applications</code> directory, follow all the steps described in the section <a href="https://www.otfitnessdata.com/getting_started#install-the-program-and-dependencies">Install the Program and Dependencies</a> on the Getting Started page, <i>not including</i> reinstalling the program itself (which would be unnecessary) but <i>including</i> installing Python and the required <code>flask</code> and <code>bs4</code> libraries after the Python installation has finished. Even if you are <i>reinstalling</i> Python and have already installed these libraries during the inital setup of the program, they <i>must</i> be installed again after the new Python installation has completed as they will no longer be present after a fresh install of Python.
+                </p>
+                <blockquote>
+                    <b>Note:</b> Make sure you navigate to the <code>Applications</code> directory in the <b>root directory</b> (<code>/Applications</code>), <i>not</i> the <code>Applications</code> directory in your home directory (<code>/Users/&ltusername&gt/Applications</code>, where <code>&ltusername&gt</code> is your username). They are two <b>different</b> directories, and the Python installation directory will be in the former. The correct <code>Applications</code> directory should be <b>visible in your Finder sidebar</b>.
+                </blockquote>
+                <p>
+                    The official Python documentation states (in <code>Applications/Python &ltversion&gt/ReadMe.rtf</code>):
+                </p>
+                <blockquote>
+                    <p>
+                        Certificate verification and OpenSSL
+                    </p>
+                    <p>
+                        This package includes its own private copy of OpenSSL 1.1.1. The trust certificates in system and user keychains managed by the Keychain Access application and the security command line utility are not used as defaults by the Python ssl module. A sample command script is included in /Applications/Python 3.10 to install a curated bundle of default root certificates from the third-party certifi package (<a href="https://pypi.org/project/certifi/" target="_blank">https://pypi.org/project/certifi/</a>). Double-click on Install Certificates to run it.
+                    </p>
+                    <p>
+                        The bundled pip has its own default certificate store for verifying download connections.
+                    </p>
+                </blockquote>
+            </li>
+            <li>
+                <p>
+                    Refresh the <a href="data.html">Data</a> page.
+                </p>
+            </li>
+            <li>
+                <p>
+                    Ensure you have installed a <a href="#modern-browsers">modern browser</a>.
+                </p>
+            </li>
+            <li>
+                <p>
+                    Update the program to the latest version by running the following on the <a href="#using-the-command-line">command line</a>:
+                    <br>
+                    <code class="code_block">
+                        cd &ltprogram_directory_path&gt
+                        git pull
+                    </code>
+                    <br>
+                    where <code>&ltprogram_directory_path&gt</code> is the path to the program directory. For example, if you installed the program in your <b>home directory</b>, the <b>first line</b> would be:
+                    <br>
+                    <code class="code_block">
+                        cd ~/otf_data
+                    </code>
+                </p>
+            </li>
+            <li>
+                <p>
+                    Delete the configuration and data files, <code>config.txt</code> and <code>data.csv</code>, respectively, in the program directory and rerun the program.
+                </p>
+            </li>
+        </ol>
+        <h2 id="reporting-issues">Reporting Issues</h2>
+        <p>
+            You can report an issue for either the <a href="https://github.com/JimmyVanHout/otf_data/issues" target="_blank">data-extracting program</a> or the <a href="https://github.com/JimmyVanHout/ot_fitness_data/issues" target="_blank">website itself</a>.
+        </p>
+        <h2 id="uninstalling-the-program">Uninstalling the Program</h2>
+        <p>
+            To uninstall the program, delete the program directory.
+        </p>
+        <br>
+        <div id="footer">
+            <p id="copyright_text">&copy 2022 <a href="https://github.com/JimmyVanHout" target="_blank">Jimmy Van Hout</a></p>
+            <p>Other sites: <a href="https://www.simpleweather.net" target="_blank">SimpleWeather.net</a> - Detailed weather forecast</p>
+        </div>
+    </body>
+</html>
